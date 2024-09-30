@@ -25,10 +25,15 @@ namespace SimpleHospitalManagementSystem
         public void AddDoctor(Doctor doctor) 
         {
             DoctorsList.Add(doctor);
-            Console.WriteLine($"Doctor {doctor.Name} (ID: {doctor.DoctorID} has been added to the hospital");
+            Console.WriteLine($"Doctor {doctor.Name} (ID: {doctor.DoctorID} has been added to the hospital.");
         }
 
         //this method to add a new patient
+        public void AddPatient(Patient patient) 
+        {
+            PatientsList.Add(patient);
+            Console.WriteLine($"Patient {patient.Name} (ID: {patient.PatientID} has been added to the hospital."
+        }
 
         //this method to  Assign a room to a patient
 
