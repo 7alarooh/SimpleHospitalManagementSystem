@@ -32,10 +32,23 @@ namespace SimpleHospitalManagementSystem
         public void AddPatient(Patient patient) 
         {
             PatientsList.Add(patient);
-            Console.WriteLine($"Patient {patient.Name} (ID: {patient.PatientID} has been added to the hospital."
+            Console.WriteLine($"Patient {patient.Name} (ID: {patient.PatientID} has been added to the hospital.");
         }
 
         //this method to  Assign a room to a patient
+        public void AssignRoomToPatient(Patient patient, Room room) 
+        {
+            if (room.IsOccupied)
+            {
+                Console.WriteLine($"Room {room.RoomNumber} is already occupied!");
+            }
+            else 
+            {
+                patient.AssignRoom(room);
+                room.OccupyRoom();
+                Console.WriteLine($"Room {room.RoomNumber} has been assigned to Patient {patient.Name}. ");
+            }
+        }
 
         // this method to displays all patients assigned to a specific doctor
 
