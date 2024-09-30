@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace SimpleHospitalManagementSystem
 {
@@ -51,7 +53,17 @@ namespace SimpleHospitalManagementSystem
         }
 
         // this method to displays all patients assigned to a specific doctor
-
-
+        public void GetDoctorPatients(Doctor doctor) 
+        {
+            if (DoctorsList.Count > 0)
+            {
+                Console.WriteLine($"Patients assigned to Dr.{doctor.Name} (ID: {doctor.DoctorID}:)");
+                foreach (var doctorPatient in DoctorsList)
+                {
+                    Console.WriteLine($"{doctorPatient.Name} \t (Patient ID:{doctorPatient.DoctorID}) ");
+                }
+            }
+            else { Console.WriteLine($"Dr.{doctor} has no patients assigned."); }
+        }
     }
 }
