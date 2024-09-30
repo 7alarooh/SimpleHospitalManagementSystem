@@ -21,5 +21,19 @@ namespace SimpleHospitalManagementSystem
             RoomsList = new List<Room>();
         }
 
+        //this method to add a new doctor
+        public void AddDoctor(Doctor doctor) 
+        {
+            DoctorsList.Add(doctor);
+            Console.WriteLine($"Doctor {doctor.Name} (ID: {doctor.DoctorID} has been added to the hospital");
+        }
+
+        //this method to add a new patient
+
+        //this method to  Assign a room to a patient
+
+        // this method to displays all patients assigned to a specific doctor
+
+
     }
 }
