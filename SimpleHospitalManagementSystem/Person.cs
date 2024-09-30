@@ -21,13 +21,11 @@ namespace SimpleHospitalManagementSystem
             this.Age = Age;
             this.GenderType = GenderType;
         }
+        
         //Method: DisplayInfo() to print the person’s details.
-        public void DisplayInfo()
+        public virtual void DisplayInfo()
         {
             Console.WriteLine($"Name: {Name} \t age: {Age} \t Gender: {GenderType} ");
         }
-
-
-
     }
 }
