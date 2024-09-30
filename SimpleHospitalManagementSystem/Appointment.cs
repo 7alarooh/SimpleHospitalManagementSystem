@@ -44,6 +44,14 @@ namespace SimpleHospitalManagementSystem
         }
 
         //this method to displays appointment details.
+        public void GetAppointmentDetails() 
+        {
+            if (!IsScheduled) { Console.WriteLine("No appointment to scheduled!"); }
+            else {
+                Console.WriteLine($"Appointment Detail:\t Patient ( {Patient.Name} ) \t Doctor: ( dr.{Doctor.Name} ) " +
+                    $"Appointment Date: {AppointmentDate}\n ");
+            }
+        }
 
     }
 }
