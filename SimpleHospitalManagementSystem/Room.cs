@@ -23,6 +23,17 @@ namespace SimpleHospitalManagementSystem
             this.TypeOfRoom = TypeOfRoom;
             IsOccupied=false; 
         }
+        //OccupyRoom() method to marks the room as occupied
+        public void OccupyRoom() 
+        {
+            if (IsOccupied) { Console.WriteLine($"Room {RoomNumber} is already occupied."); }
+            else 
+            {
+                IsOccupied = true;
+                Console.WriteLine($"Room {RoomNumber} is now occupied.");
+            }
+        }
+        
 
     }
 }
