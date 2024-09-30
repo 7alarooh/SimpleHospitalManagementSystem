@@ -33,7 +33,13 @@ namespace SimpleHospitalManagementSystem
                 Console.WriteLine($"Room {RoomNumber} is now occupied.");
             }
         }
-        
+        public void VacateRoom()
+        {
+            if (!IsOccupied) { Console.WriteLine($"Room {RoomNumber} is already vacant."); }
+            else { IsOccupied = false; Console.WriteLine($"Room {RoomNumber} is now vacanted."); }
+        }
+
+
 
     }
 }
