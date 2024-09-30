@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,7 +22,20 @@ namespace SimpleHospitalManagementSystem
             Patient = patient;
             this.Doctor = Doctor;
             IsScheduled = false;
-        }    
+        }
+
+        //this method to schedules an appointment between a patient and a doctor
+        public void ScheduleAppointment(DateTime date) 
+        {
+            if (IsScheduled) { Console.WriteLine($"Appointment already scheduled for {Patient.Name} on {AppointmentDate}."); }
+            else {
+                AppointmentDate = date;
+                IsScheduled=true;
+            }
+        }
+        //this method to cancels the scheduled appointment
+
+        //this method to displays appointment details.
 
     }
 }
