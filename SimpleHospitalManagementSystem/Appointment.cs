@@ -17,10 +17,11 @@ namespace SimpleHospitalManagementSystem
         public bool IsScheduled { get; set; }
 
         //Constructor to initialize the attributes
-        public Appointment(Patient patient, Doctor Doctor) 
+        public Appointment(Patient patient, Doctor Doctor,DateTime AppointmentDate) 
         {
             Patient = patient;
             this.Doctor = Doctor;
+            this.AppointmentDate = AppointmentDate;
             IsScheduled = false;
         }
 

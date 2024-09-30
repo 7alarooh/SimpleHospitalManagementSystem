@@ -16,7 +16,7 @@ namespace SimpleHospitalManagementSystem
         public Room AssignedRoom { get; set; }
 
         //Constructor to initialize the attributes and assign a doctor
-        public Patient(string Name, int Age, Gender Gender, int PatientID, string Ailment, Doctor Dr, Room room)
+        public Patient( int PatientID,string Name, int Age, Gender Gender, string Ailment, Doctor Dr)
             : base(Name, Age, Gender) 
         { 
             this.PatientID = PatientID;
