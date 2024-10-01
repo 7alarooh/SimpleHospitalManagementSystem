@@ -32,8 +32,8 @@ namespace SimpleHospitalManagementSystem
             AvailableAppointments = new Dictionary<Doctor, List<Appointment>>();
         }
 
-        //Methods
         // Method to add rooms to the clinic
+        // 
         public void AddRoom(Room room)
         {
             if (room == null)
@@ -45,6 +45,7 @@ namespace SimpleHospitalManagementSystem
             Rooms.Add(room);
             Console.WriteLine($"Room {room.RoomNumber} added to the clinic.");
         }
+
 
     }
 }
