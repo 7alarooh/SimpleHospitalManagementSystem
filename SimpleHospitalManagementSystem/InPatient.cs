@@ -28,5 +28,11 @@ namespace SimpleHospitalManagementSystem
             AssignedRoom = room;
             Console.WriteLine($"Room {room.RoomNumber} assigned to patient {Name}.");
         }
+        // Method to discharge the patient and free the room
+        public void Discharge()
+        {
+            AssignedRoom = null;
+            Console.WriteLine($"Patient {Name} has been discharged and the room is now free.");
+        }
     }
 }
