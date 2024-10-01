@@ -8,9 +8,16 @@ namespace SimpleHospitalManagementSystem
 {
     public class Doctor:Person
     {
+        // Enum for Doctor Specialization
+        public enum Specializations
+        {
+            Cardiology,
+            Neurology,
+            Dermatology
+        }
         //Attributes specific to doctor
         public int DoctorID { get; set; }   
-        public string Specialization {  get; set; }
+        public Specializations Specialization {  get; set; }
         public List<Patient> PatientsList { get; set; }
 
         //Constructor to initialize the attributes
