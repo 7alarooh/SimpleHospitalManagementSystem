@@ -12,7 +12,14 @@ namespace SimpleHospitalManagementSystem
         Neurology,
         Dermatology
     }
-    internal class Clinic
+    public class Clinic
     {
+        // Attributes
+        public int ClinicID { get; private set; }  
+        public string ClinicName { get; set; }  
+        public Specialization Specialization { get; set; }  
+        public List<Room> Rooms { get; private set; }  // List of rooms in the clinic
+        public Dictionary<Doctor, List<Appointment>> AvailableAppointments { get; private set; }  // Doctor-appointment mapping
+
     }
 }
