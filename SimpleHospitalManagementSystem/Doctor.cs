@@ -70,16 +70,20 @@ namespace SimpleHospitalManagementSystem
                 AssignedClinics.Add(clinic);
             }
 
-            if (!clinic.Appointments.ContainsKey(day))
+            if (!clinic.AvailableAppointments.ContainsKey(this)) // 'this' refers to the current Doctor
             {
-                clinic.Appointments[day] = new List<TimeSpan>();
+                clinic.AvailableAppointments[this] = new List<Appointment>();
             }
-
             // Generate 1-hour slots for the specified period
             TimeSpan start = TimeSpan.Zero;
             while (start < period)
             {
-                clinic.Appointments[day].Add(start);
+                Appointment newAppointment = new Appointment(null) // Create a new appointment
+                {
+                    AppointmentDate = day.Date.Add(start), // Set appointment date and time
+                    IsBooked = false // Initially, the appointment is not booked
+                };
+                clinic.AvailableAppointments[this].Add(newAppointment); // Add to the doctor's appointments in the clinic
                 start += TimeSpan.FromHours(1);
             }
 

@@ -14,7 +14,7 @@ namespace SimpleHospitalManagementSystem
         //attributes
         public Patient Patient { get; set; }
 
-        public DateTime AppointmentDate { get;private set; }
+        public DateTime AppointmentDate { get; set; }
         public TimeSpan AppointmentTime { get; private set; }  // Start time of the appointment
         public bool IsBooked { get; set; }
 
@@ -34,8 +34,9 @@ namespace SimpleHospitalManagementSystem
                 Console.WriteLine($"An appointment is already booked for {Patient.Name} on {AppointmentDate:yyyy-MM-dd} at {AppointmentTime}.");
             }
             else {
-                AppointmentDate = appointmentDate;
-                AppointmentTime = appointmentTime;
+                //AppointmentDate = appointmentDate;
+                //AppointmentTime = appointmentTime;
+                AppointmentDate = appointmentDate.Date.Add(appointmentTime);
                 IsBooked = true;
                 Console.WriteLine($"Appointment scheduled for {Patient.Name} on {AppointmentDate:yyyy-MM-dd} at {AppointmentTime}.");
 
