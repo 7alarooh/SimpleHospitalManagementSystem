@@ -7,54 +7,77 @@ namespace SimpleHospitalManagementSystem
     {
         static void Main(string[] args)
         {
-            // Test Case 1: Create doctors and patients 
-            Console.WriteLine("===== Test Case 1: Create Doctors and Patients =====");
-            Doctor doctor1 = new Doctor(1, "Dr. Smith", 45, Gender.Male, "Cardiology");
-            Doctor doctor2 = new Doctor(2, "Dr. Brown", 38, Gender.Female, "Neurology");
-            Patient patient1 = new Patient(101, "John Doe", 30, Gender.Male, "Heart Disease", doctor1);
-            Patient patient2 = new Patient(102, "Jane Roe", 28, Gender.Female, "Migraine", doctor2);
+            loginPage();
+        }
+        static void loginPage() 
+        {
+            Login loginSystem = new Login();
 
-            // Display information 
-            patient1.DisplayInfo();
-            patient2.DisplayInfo();
-            doctor1.DisplayInfo();
-            doctor2.DisplayInfo();
+            // Register some users (Doctor and Patient) for testing
+            loginSystem.RegisterUser(101, "password123", "Doctor");
+            loginSystem.RegisterUser(201, "mypassword", "Patient");
 
-            // Test Case 2: Assign rooms to patients 
-            Console.WriteLine("\n===== Test Case 2: Room Assignment =====");
-            Room room1 = new Room(202, RoomType.ICU);
-            Room room2 = new Room(203, RoomType.General);
+            while (true)
+            {
+                Console.Clear();  // Clear the console to make it feel like a "new page"
+                Console.WriteLine("==== Welcome to Hospital Management System ====");
+                Console.WriteLine("Please log in:");
 
-            patient1.AssignRoom(room1);
-            patient2.AssignRoom(room2);
+                // Prompt user for login details
+                Console.Write("Enter ID: ");
+                int id = int.Parse(Console.ReadLine());
 
-            // Display room details 
-            Console.WriteLine($"Room {room1.RoomNumber} is occupied: {room1.IsOccupied}");
-            Console.WriteLine($"Room {room2.RoomNumber} is occupied: {room2.IsOccupied}");
+                Console.Write("Enter Password: ");
+                string password = Console.ReadLine();
 
-            // Test Case 3: Schedule appointments 
-            Console.WriteLine("\n===== Test Case 3: Schedule Appointments =====");
-            Appointment appointment1 = new Appointment(patient1, doctor1, new DateTime(2024, 10,5, 9, 30, 0));
-            appointment1.ScheduleAppointment(new DateTime(2024, 10, 5, 9, 30, 0));
-            appointment1.GetAppointmentDetails();
-            Appointment appointment2 = new Appointment(patient2, doctor2, new DateTime(2024, 10, 6, 11, 0, 0));
-            appointment2.ScheduleAppointment(new DateTime(2024, 10, 6, 11, 0, 0));
-            appointment2.GetAppointmentDetails();
+                // Attempt to log in
+                var role = loginSystem.LoginUser(id,password);
 
-            // Test Case 4: Discharge patients 
-            Console.WriteLine("\n===== Test Case 4: Discharge Patients =====");
-            patient1.Discharge();
-            Console.WriteLine($"Patient {patient1.Name} has been discharged." +
-                $" Room { room1.RoomNumber} is now occupied: { room1.IsOccupied} ");
+                if (role != null)
+                {
+                    Console.WriteLine($"Login successful! Welcome, {role} with ID {id}.");
 
-            // Test Case 5: Display doctor-patient details 
-            Console.WriteLine("\n===== Test Case 5: Display Doctor-Patient Details =====");
-            doctor1.DisplayInfo();
-            doctor2.DisplayInfo();
+                    // Depending on role, show different menus
+                    if (role == "Doctor")
+                    {
+                        DoctorMenu();
+                    }
+                    else if (role == "Patient")
+                    {
+                        PatientMenu();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid ID or Password. Press any key to try again.");
+                    Console.ReadKey();
+                }
+            }
+        }
+        // Method to display Patient menu
+        static void PatientMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("==== Patient Dashboard ====");
+            Console.WriteLine("1. View assigned doctor");
+            Console.WriteLine("2. View room details");
+            Console.WriteLine("3. View appointment schedule");
+            Console.WriteLine("4. Logout");
+            // Implement patient-specific functionalities here
+            Console.ReadKey();
+        }
 
-
-
-
+        // Method to display Doctor menu
+        static void DoctorMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("==== Doctor Dashboard ====");
+            Console.WriteLine("1. View patient list");
+            Console.WriteLine("2. Add patient");
+            Console.WriteLine("3. Remove patient");
+            Console.WriteLine("4. Logout");
+            // Implement doctor-specific functionalities here
+            Console.ReadKey();
         }
     }
 }

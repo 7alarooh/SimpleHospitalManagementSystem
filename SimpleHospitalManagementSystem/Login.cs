@@ -28,24 +28,14 @@ namespace SimpleHospitalManagementSystem
         }
 
         // Log in a user using their ID and password
-        public void LoginUser(int id, string password)
+        public string LoginUser(int id, string password)
         {
             if (users.ContainsKey(id))
             {
                 var (storedPassword, role) = users[id];
                 if (storedPassword == password)
                 {
-                    Console.WriteLine($"Login successful! Welcome, {role} with ID {id}.");
-                    if (role == "Patient")
-                    {
-                        Console.WriteLine("Accessing patient features...");
-                        // Implement patient-specific functionalities
-                    }
-                    else if (role == "Doctor")
-                    {
-                        Console.WriteLine("Accessing doctor features...");
-                        // Implement doctor-specific functionalities
-                    }
+                    return role;  // Return role on successful login
                 }
                 else
                 {
@@ -56,6 +46,7 @@ namespace SimpleHospitalManagementSystem
             {
                 Console.WriteLine("User ID not found.");
             }
+            return null;  // Return null if login fails
         }
     }
 }
