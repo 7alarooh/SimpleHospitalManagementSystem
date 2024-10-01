@@ -12,42 +12,21 @@ namespace SimpleHospitalManagementSystem
         //Attributes specific to patient
         public int PatientID { get; set; }
         public string Ailment { get; set; }
-        public Doctor AssignedDoctor { get; set; }
-        public Room AssignedRoom { get; set; }
 
         //Constructor to initialize the attributes and assign a doctor
-        public Patient( int PatientID,string Name, int Age, Gender Gender, string Ailment, Doctor Dr)
-            : base(Name, Age, Gender) 
-        { 
-            this.PatientID = PatientID;
-            this.Ailment = Ailment;
-            AssignedDoctor = Dr;
-            AssignedRoom = null;
+        public Patient(int patientID, string name, int age, Gender gender, string ailment)
+             : base(name, age, gender)
+        {
+            this.PatientID = patientID;
+            this.Ailment = ailment;
         }
 
         //Methods
-        //Method to assign a room to the patient
-        public void AssignRoom(Room room) 
-        {
-            AssignedRoom=room;
-            Console.WriteLine($"Room {room.RoomNumber} assigned to patient {Name}.");
-        }
-        //Method to discharged the patient
-        public void Discharge() 
-        {
-            AssignedRoom = null;
-            Console.WriteLine($"Patient {Name} has been discharged.");
-        }
-        //Override the DisplayInfo() method to include PatientID and Ailment. 
+        // Method to display patient-specific information
         public override void DisplayInfo()
         {
             base.DisplayInfo();
-            Console.WriteLine($"Patient ID: {PatientID} \t Ailment: {Ailment} \t Assigned Doctor: {AssignedDoctor.Name} ");
-            if (AssignedRoom != null)
-            {
-                Console.WriteLine($"Assigned Room:{AssignedRoom.RoomNumber}");
-            }
-            else { Console.WriteLine("No Room Assigned"); }
+            Console.WriteLine($"Patient ID: {PatientID} \t Ailment: {Ailment}");
         }
 
 
