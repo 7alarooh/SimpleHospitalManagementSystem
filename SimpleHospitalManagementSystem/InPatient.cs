@@ -13,8 +13,8 @@ namespace SimpleHospitalManagementSystem
         public Doctor AssignedDoctor { get; private set; }
         public DateTime AdmissionDate { get; private set; }
         // Constructor to initialize the in-patient attributes
-        public InPatient(int patientID, string name, int age, Gender gender, string ailment, Doctor doctor, DateTime admissionDate)
-            : base(patientID, name, age, gender, ailment)
+        public InPatient(int patientID, string name, int age, Gender gender, string Password, string ailment, Doctor doctor, DateTime admissionDate)
+            : base(patientID, name, age, gender,Password, ailment)
         {
             this.AssignedDoctor = doctor;
             this.AdmissionDate = admissionDate;

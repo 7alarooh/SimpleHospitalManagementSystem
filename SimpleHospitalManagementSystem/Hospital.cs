@@ -8,6 +8,7 @@ using System.Xml.Linq;
 
 namespace SimpleHospitalManagementSystem
 {
+    
     public class Hospital
     {
         //Attributes
@@ -36,24 +37,39 @@ namespace SimpleHospitalManagementSystem
             PatientsList.Add(patient);
             Console.WriteLine($"Patient {patient.Name} (ID: {patient.PatientID} has been added to the hospital.");
         }
-
-        //this method to  Assign a room to a patient
-        public void AssignRoomToPatient(Patient patient, Room room) 
+        // Method to get a patient by their ID
+        public Patient GetPatientById(int id)
         {
-            if (room.IsOccupied)
+            // Search for the patient in the list using LINQ
+            Patient patient = PatientsList.FirstOrDefault(p => p.PatientID == id);
+
+            if (patient != null)
             {
-                Console.WriteLine($"Room {room.RoomNumber} is already occupied!");
+                return patient;
             }
-            else 
+            else
             {
-                patient.AssignRoom(room);
-                room.OccupyRoom();
-                Console.WriteLine($"Room {room.RoomNumber} has been assigned to Patient {patient.Name}. ");
+                Console.WriteLine($"No patient found with ID {id}.");
+                return null;
             }
         }
+            //this method to  Assign a room to a patient
+            //public void AssignRoomToPatient(Patient patient, Room room) 
+            //{
+            //    if (room.IsOccupied)
+            //    {
+            //        Console.WriteLine($"Room {room.RoomNumber} is already occupied!");
+            //    }
+            //    else 
+            //    {
+            //        patient.AssignRoom(room);
+            //        room.OccupyRoom();
+            //        Console.WriteLine($"Room {room.RoomNumber} has been assigned to Patient {patient.Name}. ");
+            //    }
+            //}
 
-        // this method to displays all patients assigned to a specific doctor
-        public void GetDoctorPatients(Doctor doctor) 
+            // this method to displays all patients assigned to a specific doctor
+            public void GetDoctorPatients(Doctor doctor) 
         {
             if (DoctorsList.Count > 0)
             {

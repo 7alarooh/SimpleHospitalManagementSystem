@@ -19,9 +19,12 @@ namespace SimpleHospitalManagementSystem
         {
             this.PatientID = patientID;
             this.Ailment = ailment;
+
         }
 
+
         //Methods
+       
         // Method to display patient-specific information
         public override void DisplayInfo()
         {
