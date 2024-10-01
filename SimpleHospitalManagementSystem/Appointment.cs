@@ -44,10 +44,10 @@ namespace SimpleHospitalManagementSystem
         //this method to cancels the scheduled appointment
         public void CancelAppointment() 
         {
-            if (!IsScheduled) { Console.WriteLine($"No appointment to cancel."); }
+            if (!IsBooked) { Console.WriteLine($"No appointment to cancel."); }
             else {
-                Console.WriteLine($"Aappointment for {Patient.Name} with Dr.{Doctor.Name} on {AppointmentDate} has been canceled.");
-                IsScheduled =false;                           
+                Console.WriteLine($"Aappointment for {Patient.Name} on {AppointmentDate:yyyy-MM-dd} at {AppointmentTime} has been canceled !");
+                IsBooked =false;                           
             }
         }
 
