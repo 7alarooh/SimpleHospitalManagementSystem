@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,15 +16,13 @@ namespace SimpleHospitalManagementSystem
 
         public DateTime AppointmentDate { get;private set; }
         public TimeSpan AppointmentTime { get; private set; }  // Start time of the appointment
-        public bool IsScheduled { get; set; }
+        public bool IsBooked { get; set; }
 
         //Constructor to initialize the attributes
-        public Appointment(Patient patient, Doctor Doctor,DateTime AppointmentDate) 
+        public Appointment(Patient patient)
         {
             Patient = patient;
-            this.Doctor = Doctor;
-            this.AppointmentDate = AppointmentDate;
-            IsScheduled = false;
+            IsBooked = false;  // Initially, the appointment is not booked
         }
 
         //this method to schedules an appointment between a patient and a doctor
