@@ -25,13 +25,20 @@ namespace SimpleHospitalManagementSystem
             IsBooked = false;  // Initially, the appointment is not booked
         }
 
-        //this method to schedules an appointment between a patient and a doctor
-        public void ScheduleAppointment(DateTime date) 
+        //Methods
+
+        //this method to schedules an appointment 
+        public void ScheduleAppointment(DateTime appointmentDate, TimeSpan appointmentTime)
         {
-            if (IsScheduled) { Console.WriteLine($"Appointment already scheduled for {Patient.Name} on {AppointmentDate}."); }
+            if (IsBooked) {
+                Console.WriteLine($"An appointment is already booked for {Patient.Name} on {AppointmentDate:yyyy-MM-dd} at {AppointmentTime}.");
+            }
             else {
-                AppointmentDate = date;
-                IsScheduled=true;
+                AppointmentDate = appointmentDate;
+                AppointmentTime = appointmentTime;
+                IsBooked = true;
+                Console.WriteLine($"Appointment scheduled for {Patient.Name} on {AppointmentDate:yyyy-MM-dd} at {AppointmentTime}.");
+
             }
         }
         //this method to cancels the scheduled appointment
