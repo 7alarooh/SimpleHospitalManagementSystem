@@ -23,6 +23,8 @@ namespace SimpleHospitalManagementSystem
             this.TypeOfRoom = TypeOfRoom;
             IsOccupied=false; 
         }
+
+        //methods
         //OccupyRoom() method to marks the room as occupied
         public void OccupyRoom() 
         {
@@ -33,10 +35,18 @@ namespace SimpleHospitalManagementSystem
                 Console.WriteLine($"Room {RoomNumber} is now occupied.");
             }
         }
+        // Method to mark the room as vacant
         public void VacateRoom()
         {
             if (!IsOccupied) { Console.WriteLine($"Room {RoomNumber} is already vacant."); }
             else { IsOccupied = false; Console.WriteLine($"Room {RoomNumber} is now vacanted."); }
+        }
+        // Method to display room information
+        public void DisplayRoomInfo()
+        {
+            Console.WriteLine($"Room Number: {RoomNumber} \t " +
+                $"Room Type: {TypeOfRoom} \t " +
+                $"Is Occupied: {(IsOccupied ? "Yes" : "No")}");
         }
 
 
