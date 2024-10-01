@@ -12,8 +12,8 @@ namespace SimpleHospitalManagementSystem
         public Clinic ClinicAssigned { get; private set; }
 
         // Constructor to initialize the out-patient attributes
-        public OutPatient(int patientID, string name, int age, Gender gender, string ailment, Clinic clinicAssigned)
-            : base(patientID, name, age, gender, ailment)
+        public OutPatient(int patientID, string name, int age, Gender gender,string Password, string ailment, Clinic clinicAssigned)
+            : base(patientID, name, age, gender,Password, ailment)
         {
             this.ClinicAssigned = clinicAssigned;
         }
@@ -26,12 +26,12 @@ namespace SimpleHospitalManagementSystem
             Console.WriteLine($"Assigned Clinic: {ClinicAssigned.ClinicName}");
 
             // Display upcoming appointments if available
-            if (ClinicAssigned.Appointments.Count > 0)
+            if (ClinicAssigned.AvailableAppointments.Count > 0)
             {
                 Console.WriteLine("Upcoming Appointments:");
-                foreach (var appointment in ClinicAssigned.Appointments)
+                foreach (var appointment in ClinicAssigned.AvailableAppointments)
                 {
-                    Console.WriteLine($"{appointment.Key.ToShortDateString()}:");
+                    Console.WriteLine($"{appointment.Key}:");
                     foreach (var slot in appointment.Value)
                     {
                         Console.WriteLine($"\tTime Slot: {slot}");
