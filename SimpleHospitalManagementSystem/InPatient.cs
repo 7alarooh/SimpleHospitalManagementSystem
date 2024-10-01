@@ -20,5 +20,13 @@ namespace SimpleHospitalManagementSystem
             this.AdmissionDate = admissionDate;
             this.AssignedRoom = null; // Initially no room assigned
         }
+
+        // Methods 
+        // Method to assign a room to the in-patient
+        public void AssignRoom(Room room)
+        {
+            AssignedRoom = room;
+            Console.WriteLine($"Room {room.RoomNumber} assigned to patient {Name}.");
+        }
     }
 }
