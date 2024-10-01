@@ -64,5 +64,35 @@ namespace SimpleHospitalManagementSystem
             Console.WriteLine($"Appointments for Dr. {doctor.Name} on {appointmentDay.ToShortDateString()} have been added.");
         }
 
+        // Method to book an appointment for a patient with a specific doctor at the clinic
+        public void BookAppointment(Patient patient, Doctor doctor, DateTime appointmentDay, TimeSpan appointmentTime)
+        {
+            if (!AvailableAppointments.ContainsKey(doctor))
+            {
+                Console.WriteLine($"No available appointments for Dr. {doctor.Name}.");
+                return;
+            }
+
+            // Find an available appointment slot that matches the requested time
+            Appointment availableAppointment = AvailableAppointments[doctor].Find(app =>
+                app.AppointmentDate.Date == appointmentDay.Date &&
+                app.AppointmentTime == appointmentTime &&
+                !app.IsBooked);
+
+            if (availableAppointment == null)
+            {
+                Console.WriteLine($"No available appointment slot for Dr. {doctor.Name} at {appointmentTime} on {appointmentDay.ToShortDateString()}.");
+            }
+            else
+            {
+                // Book the appointment for the patient
+                availableAppointment.Patient = patient;
+                availableAppointment.ScheduleAppointment(appointmentDay, appointmentTime);
+                Console.WriteLine($"Appointment booked for {patient.Name} with Dr. {doctor.Name} on {appointmentDay.ToShortDateString()} at {appointmentTime}.");
+            }
+        }
+
+
+
     }
 }
