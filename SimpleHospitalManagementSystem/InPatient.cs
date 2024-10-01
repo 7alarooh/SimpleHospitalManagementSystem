@@ -34,5 +34,20 @@ namespace SimpleHospitalManagementSystem
             AssignedRoom = null;
             Console.WriteLine($"Patient {Name} has been discharged and the room is now free.");
         }
-    }
+        // Override the DisplayInfo() method to include room and assigned doctor
+        public override void DisplayInfo()
+        {
+            base.DisplayInfo();
+            Console.WriteLine($"Assigned Doctor: {AssignedDoctor.Name} \t Admission Date: {AdmissionDate.ToShortDateString()}");
+
+            if (AssignedRoom != null)
+            {
+                Console.WriteLine($"Assigned Room: {AssignedRoom.RoomNumber}");
+            }
+            else
+            {
+                Console.WriteLine("No Room Assigned");
+            }
+        }
+        }
 }
