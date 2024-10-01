@@ -17,5 +17,32 @@ namespace SimpleHospitalManagementSystem
         {
             this.ClinicAssigned = clinicAssigned;
         }
-    }
+
+        //methods 
+        // Override the DisplayInfo() method to include clinic and upcoming appointments
+        public override void DisplayInfo()
+        {
+            base.DisplayInfo();
+            Console.WriteLine($"Assigned Clinic: {ClinicAssigned.ClinicName}");
+
+            // Display upcoming appointments if available
+            if (ClinicAssigned.Appointments.Count > 0)
+            {
+                Console.WriteLine("Upcoming Appointments:");
+                foreach (var appointment in ClinicAssigned.Appointments)
+                {
+                    Console.WriteLine($"{appointment.Key.ToShortDateString()}:");
+                    foreach (var slot in appointment.Value)
+                    {
+                        Console.WriteLine($"\tTime Slot: {slot}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("No upcoming appointments.");
+            }
+        }
+
+        }
 }
