@@ -13,13 +13,15 @@ namespace SimpleHospitalManagementSystem
         public string Name{get;private set;}
         public int Age { get; private set; }
         public Gender GenderType { get; private set; }
+        public string Password { get; set; } // New attribute for login
 
         //Constructor: Initialize the attributes above.
-        public Person(string Name,int Age, Gender GenderType) 
+        public Person(string Name,int Age, Gender GenderType, string Password) 
         { 
             this.Name = Name;
             this.Age = Age;
             this.GenderType = GenderType;
+            this.Password = Password;
         }
         
         //Method: DisplayInfo() to print the person’s details.

@@ -23,8 +23,8 @@ namespace SimpleHospitalManagementSystem
         public List<Patient> PatientsList { get; set; }
 
         //Constructor to initialize the attributes
-        public Doctor(int DoctorID, string Name, int Age, Gender Gender, Specializations Specialization)
-            : base(Name, Age, Gender)
+        public Doctor(int DoctorID, string Name, int Age, Gender Gender, Specializations Specialization, string Password)
+            : base(Name, Age, Gender, Password)
         {
             this.DoctorID = DoctorID;
             this.Specialization = Specialization;
