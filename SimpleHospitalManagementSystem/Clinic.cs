@@ -91,6 +91,25 @@ namespace SimpleHospitalManagementSystem
                 Console.WriteLine($"Appointment booked for {patient.Name} with Dr. {doctor.Name} on {appointmentDay.ToShortDateString()} at {appointmentTime}.");
             }
         }
+        // Method to display all available appointments for the clinic, organized by doctor and time slot
+        public void DisplayAvailableAppointments()
+        {
+            foreach (var doctorAppointments in AvailableAppointments)
+            {
+                Doctor doctor = doctorAppointments.Key;
+                List<Appointment> appointments = doctorAppointments.Value;
+
+                Console.WriteLine($"Available appointments for Dr. {doctor.Name}:");
+
+                foreach (var appointment in appointments)
+                {
+                    if (!appointment.IsBooked)
+                    {
+                        Console.WriteLine($"- Date: {appointment.AppointmentDate.ToShortDateString()} | Time: {appointment.AppointmentTime}");
+                    }
+                }
+            }
+        }
 
 
 
