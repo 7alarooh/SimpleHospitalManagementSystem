@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace SimpleHospitalManagementSystem
 {
+    public enum Gender { Male, Female }
     public class Person
     {
         //Attributes
-        public enum Gender { Male, Female }
         public string Name{get;private set;}
         public int Age { get; private set; }
         public Gender GenderType { get; private set; }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace SimpleHospitalManagementSystem
 {
+    //enum for room type
+    public enum RoomType { IPR, OPR }
     public class Room
     {
-        //enum for room type
-        public enum RoomType { IPR, OPR }
+        
 
         //attributes
         public int RoomNumber {  get; set; }

@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace SimpleHospitalManagementSystem
 {
+    // Enum for Doctor Specialization
+    public enum Specializations
+    {
+        Cardiology,
+        Neurology,
+        Dermatology
+    }
     public class Doctor:Person
     {
-        // Enum for Doctor Specialization
-        public enum Specializations
-        {
-            Cardiology,
-            Neurology,
-            Dermatology
-        }
+        
         //Attributes specific to doctor
         public int DoctorID { get; set; }   
         public Specializations Specialization {  get; set; }
