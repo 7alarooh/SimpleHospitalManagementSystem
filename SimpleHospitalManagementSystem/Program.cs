@@ -6,34 +6,33 @@ namespace SimpleHospitalManagementSystem
     public class Program
     {
         private static Hospital hospital = new Hospital();
+        static PatientManager patientManager = new PatientManager();
 
         public static void Main(string[] args)
         {
-            PatientManager patientManager = new PatientManager();
-            //patientManager.AddPatient(new InPatient(1, "John Doe", 30, Gender.Male, "password123", "Flu", new Doctor(1, "Smith", 36, Gender.Male, Specializations.Cardiology, "123abcd"), DateTime.Now));
-            //patientManager.AddPatient(new OutPatient(2, "Jane Doe", 25, Gender.Female, "mypassword", "Skin Allergy", new Clinic(1, "Dermatology Clinic", Specialization.Dermatology)));
-            
             // Create doctors
             Doctor doctor1 = new Doctor(3, "John Smith", 45, Gender.Male, Specializations.Cardiology,"123456");
+            Doctor doctor4 = new Doctor(3, "Ali", 45, Gender.Male, Specializations.Cardiology, "123456");
             Doctor doctor2 = new Doctor(2, "Alice Brown", 38, Gender.Female, Specializations.Neurology,"123456");
-            Doctor doctor3 = new Doctor(1, "Smith", 36, Gender.Male, Specializations.Cardiology, "123abcd");
+            Doctor doctor3 = new Doctor(1, "Smith", 36, Gender.Male, Specializations.Dermatology, "123abcd");
             // Create clinics
             Clinic cardiologyClinic = new Clinic(2, "Cardiology Clinic", Specialization.Cardiology);
             Clinic neurologyClinic = new Clinic(3, "Neurology Clinic", Specialization.Neurology);
-
+            Clinic dermatologyClinic = new Clinic(1, "Dermatology Clinic", Specialization.Dermatology);
+           
             // Assign doctors to clinics and generate appointment slots (9 AM - 12 PM)
             doctor1.AssignToClinic(cardiologyClinic, new DateTime(2024, 10, 5), TimeSpan.FromHours(3)); // Expected: Appointments generated for 9 AM, 10 AM, 11 AM
             doctor2.AssignToClinic(neurologyClinic, new DateTime(2024, 10, 6), TimeSpan.FromHours(3));  // Expected: Appointments generated for 9 AM, 10 AM, 11 AM
-                                                                                                        // Create rooms for clinics
+            
+            // Create rooms for clinics
             Room room1 = new Room(101, RoomType.IPR);  // Room for in-patients
             Room room2 = new Room(102, RoomType.OPR);  // Room for out-patients
             cardiologyClinic.AddRoom(room1); // Expected: Room 101 added to Cardiology Clinic
             neurologyClinic.AddRoom(room2);  // Expected: Room 102 added to Neurology Clinic
 
-
             // Create patients
             patientManager.AddPatient(new InPatient(1, "John Doe", 30, Gender.Male, "password123", "Cardiac Arrest", doctor1,  DateTime.Now));
-            patientManager.AddPatient(new OutPatient(2, "Jane Doe", 25, Gender.Female, "mypassword", "Alice Brown", new Clinic(1, "Dermatology Clinic", Specialization.Dermatology)));
+            patientManager.AddPatient(new OutPatient(2, "Jane Doe", 25, Gender.Female, "mypassword", "Alice Brown", dermatologyClinic));
             Patient inpatient1 = patientManager.GetPatientById(1); // Get InPatient John Doe
             Patient outpatient1 = patientManager.GetPatientById(2); // Get OutPatient Jane Doe
 
@@ -52,7 +51,9 @@ namespace SimpleHospitalManagementSystem
                 outPatientObj.ClinicAssigned = cardiologyClinic; // Set the correct clinic
                 cardiologyClinic.BookAppointment(outPatientObj, doctor1, new DateTime(2024, 10, 5), TimeSpan.FromHours(10)); // Expected: Appointment at 10 AM booked
                 
+
             }
+            
             cardiologyClinic.DisplayAvailableAppointments();
 
             // outpatient1.BookAppointment(cardiologyClinic, new DateTime(2024, 10, 5), TimeSpan.FromHours(10)); // Expected: Appointment at 10 AM booked

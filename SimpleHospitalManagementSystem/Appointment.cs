@@ -15,7 +15,7 @@ namespace SimpleHospitalManagementSystem
         public Patient Patient { get; set; }
 
         public DateTime AppointmentDate { get; set; }
-        public TimeSpan AppointmentTime { get; private set; }  // Start time of the appointment
+        public TimeSpan AppointmentTime { get;  set; }  // Start time of the appointment
         public bool IsBooked { get; set; }
 
         //Constructor to initialize the attributes

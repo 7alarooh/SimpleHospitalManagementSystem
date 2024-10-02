@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,9 +57,13 @@ namespace SimpleHospitalManagementSystem
             for (int i = 0; i < period.TotalHours; i++)
             {
                 DateTime appointmentTime = appointmentDay.AddHours(i);
-                Appointment appointment = new Appointment(null);  // No patient assigned yet
-                appointment.ScheduleAppointment(appointmentTime, new TimeSpan(1, 0, 0));  // 1-hour slot
-                AvailableAppointments[doctor].Add(appointment);
+                Appointment appointment = new Appointment(null)  // No patient assigned yet
+                {
+                    AppointmentDate = appointmentTime.Date,
+                    AppointmentTime = TimeSpan.FromHours(i + 9), // Appointment times starting from 9:00 AM
+                    IsBooked = false
+                };
+               AvailableAppointments[doctor].Add(appointment);
             }
 
             Console.WriteLine($"Appointments for Dr. {doctor.Name} on {appointmentDay.ToShortDateString()} have been added.");
