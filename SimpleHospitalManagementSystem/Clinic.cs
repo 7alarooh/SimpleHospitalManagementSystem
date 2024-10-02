@@ -16,10 +16,10 @@ namespace SimpleHospitalManagementSystem
     public class Clinic
     {
         // Attributes
-        public int ClinicID { get; private set; }  
+        public int ClinicID { get;  set; }  
         public string ClinicName { get; set; }  
         public Specialization Specialization { get; set; }  
-        public List<Room> Rooms { get; private set; }  // List of rooms in the clinic
+        public List<Room> Rooms { get;  set; }  // List of rooms in the clinic
         public Dictionary<Doctor, List<Appointment>> AvailableAppointments { get;  set; }  // Doctor-appointment mapping
 
         // Constructor to initialize attributes
@@ -141,6 +141,29 @@ namespace SimpleHospitalManagementSystem
                     }
                 }
             }
+        }
+        // Example method to get a doctor for a given out-patient
+
+        public Doctor GetFirstDoctor()
+        {
+            // Return the first doctor in the available appointments
+            return AvailableAppointments.Keys.FirstOrDefault();
+        }
+        public Appointment GetAppointmentForPatient(Patient patient)
+        {
+            // Iterate through all doctors to find an appointment for the patient
+            foreach (var doctor in AvailableAppointments.Keys) // Assuming you have a Doctors list or collection
+            {
+                if (AvailableAppointments.ContainsKey(doctor))
+                {
+                    var appointment = AvailableAppointments[doctor].FirstOrDefault(a => a.Patient == patient && a.IsBooked);
+                    if (appointment != null)
+                    {
+                        return appointment; // Return the first found appointment for the patient
+                    }
+                }
+            }
+            return null; // No appointment found
         }
 
 

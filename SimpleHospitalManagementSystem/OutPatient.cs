@@ -9,7 +9,8 @@ namespace SimpleHospitalManagementSystem
     public class OutPatient : Patient
     {
         // Attribute specific 
-        public Clinic ClinicAssigned { get;  set; }
+        public Clinic ClinicAssigned { get; set; }
+
 
         // Constructor to initialize the out-patient attributes
         public OutPatient(int patientID, string name, int age, Gender gender,string Password, string ailment, Clinic clinicAssigned)
