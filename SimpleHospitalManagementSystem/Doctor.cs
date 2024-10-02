@@ -75,8 +75,8 @@ namespace SimpleHospitalManagementSystem
                 clinic.AvailableAppointments[this] = new List<Appointment>();
             }
             // Generate 1-hour slots for the specified period
-            TimeSpan start = TimeSpan.Zero;
-            while (start < period)
+            TimeSpan start = TimeSpan.FromHours(9); // Start at 9:00 AM
+            while (start < TimeSpan.FromHours(9) + period)
             {
                 Appointment newAppointment = new Appointment(null) // Create a new appointment
                 {
@@ -87,7 +87,7 @@ namespace SimpleHospitalManagementSystem
                 start += TimeSpan.FromHours(1);
             }
 
-            Console.WriteLine($"Doctor {Name} assigned to {clinic.ClinicName} on {day.ToShortDateString()} for {period.TotalHours} hours.");
+            Console.WriteLine($"Doctor {Name} assigned to {clinic.ClinicName} on {day} for {period.TotalHours} hours.");
         }
         //Override the DisplayInfo() method to include PatientID and Ailment
         public override void DisplayInfo() 
