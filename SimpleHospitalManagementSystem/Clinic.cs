@@ -19,7 +19,7 @@ namespace SimpleHospitalManagementSystem
         public string ClinicName { get; set; }  
         public Specialization Specialization { get; set; }  
         public List<Room> Rooms { get; private set; }  // List of rooms in the clinic
-        public Dictionary<Doctor, List<Appointment>> AvailableAppointments { get; private set; }  // Doctor-appointment mapping
+        public Dictionary<Doctor, List<Appointment>> AvailableAppointments { get;  set; }  // Doctor-appointment mapping
 
         // Constructor to initialize attributes
         public Clinic(int ClinicID, string ClinicName, Specialization Specialization)
@@ -89,6 +89,33 @@ namespace SimpleHospitalManagementSystem
                 availableAppointment.Patient = patient;
                 availableAppointment.ScheduleAppointment(appointmentDay, appointmentTime);
                 Console.WriteLine($"Appointment booked for {patient.Name} with Dr. {doctor.Name} on {appointmentDay.ToShortDateString()} at {appointmentTime}.");
+            }
+        }
+        public void CancelAppointment(Patient patient, Doctor doctor, DateTime appointmentDay, TimeSpan appointmentTime)
+        {
+            if (!AvailableAppointments.ContainsKey(doctor))
+            {
+                Console.WriteLine($"No appointments found for Dr. {doctor.Name}.");
+                return;
+            }
+
+            // Find the booked appointment
+            Appointment bookedAppointment = AvailableAppointments[doctor].Find(app =>
+                app.AppointmentDate.Date == appointmentDay.Date &&
+                app.AppointmentTime == appointmentTime &&
+                app.IsBooked &&
+                app.Patient == patient);
+
+            if (bookedAppointment == null)
+            {
+                Console.WriteLine($"No booked appointment found for {patient.Name} with Dr. {doctor.Name} at {appointmentTime} on {appointmentDay.ToShortDateString()}.");
+            }
+            else
+            {
+                // Cancel the appointment
+                bookedAppointment.IsBooked = false;
+                bookedAppointment.Patient = null;
+                Console.WriteLine($"Appointment for {patient.Name} with Dr. {doctor.Name} at {appointmentTime} on {appointmentDay.ToShortDateString()} has been canceled.");
             }
         }
         // Method to display all available appointments for the clinic, organized by doctor and time slot

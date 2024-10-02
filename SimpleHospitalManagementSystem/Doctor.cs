@@ -28,8 +28,8 @@ namespace SimpleHospitalManagementSystem
         {
             this.DoctorID = DoctorID;
             this.Specialization = Specialization;
-            this.AssignedClinics = new List<Clinic>();
-            this.PatientsList = new List<Patient>();
+            AssignedClinics = new List<Clinic>();
+            PatientsList = new List<Patient>();
         }
         //method to add a patient to the doctor’s list
         public void AddPatient(Patient patient) 

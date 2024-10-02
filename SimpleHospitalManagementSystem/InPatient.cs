@@ -9,9 +9,9 @@ namespace SimpleHospitalManagementSystem
     public class InPatient:Patient
     {
         // Additional attributes specific to in-patient
-        public Room AssignedRoom { get; private set; }
-        public Doctor AssignedDoctor { get; private set; }
-        public DateTime AdmissionDate { get; private set; }
+        public Room AssignedRoom { get;  set; }
+        public Doctor AssignedDoctor { get;  set; }
+        public DateTime AdmissionDate { get;  set; }
         // Constructor to initialize the in-patient attributes
         public InPatient(int patientID, string name, int age, Gender gender, string Password, string ailment, Doctor doctor, DateTime admissionDate)
             : base(patientID, name, age, gender,Password, ailment)
