@@ -13,14 +13,16 @@ namespace SimpleHospitalManagementSystem
     {
         //Attributes
         public List<Doctor> DoctorsList { get; set; }
-        public List<Patient> PatientsList {  get; set; }
+        // Dictionary to store patients with their IDs as the key
+        public Dictionary<int, Patient> patients;
+
         public List<Room> RoomsList { get; set; }
 
         //Constructor initializes the lists
         public Hospital() 
         {
             DoctorsList = new List<Doctor>();
-            PatientsList = new List<Patient>();
+            patients = new Dictionary<int, Patient>();
             RoomsList = new List<Room>();
         }
 
@@ -34,18 +36,22 @@ namespace SimpleHospitalManagementSystem
         //this method to add a new patient
         public void AddPatient(Patient patient) 
         {
-            PatientsList.Add(patient);
-            Console.WriteLine($"Patient {patient.Name} (ID: {patient.PatientID} has been added to the hospital.");
+            if (!patients.ContainsKey(patient.PatientID))
+            {
+                patients.Add(patient.PatientID, patient);
+                Console.WriteLine($"Patient {patient.Name} added with ID {patient.PatientID}.");
+            }
+            else
+            {
+                Console.WriteLine($"Patient with ID {patient.PatientID} already exists.");
+            }
         }
         // Method to get a patient by their ID
         public Patient GetPatientById(int id)
         {
-            // Search for the patient in the list using LINQ
-            Patient patient = PatientsList.FirstOrDefault(p => p.PatientID == id);
-
-            if (patient != null)
+            if (patients.ContainsKey(id))
             {
-                return patient;
+                return patients[id];
             }
             else
             {
@@ -69,7 +75,7 @@ namespace SimpleHospitalManagementSystem
             //}
 
             // this method to displays all patients assigned to a specific doctor
-            public void GetDoctorPatients(Doctor doctor) 
+        public void GetDoctorPatients(Doctor doctor) 
         {
             if (DoctorsList.Count > 0)
             {
@@ -81,5 +87,6 @@ namespace SimpleHospitalManagementSystem
             }
             else { Console.WriteLine($"Dr.{doctor} has no patients assigned."); }
         }
+       
     }
 }

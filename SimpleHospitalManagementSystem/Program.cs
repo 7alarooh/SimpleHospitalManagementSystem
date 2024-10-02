@@ -6,7 +6,7 @@ namespace SimpleHospitalManagementSystem
     public class Program
     {
         private static Hospital hospital = new Hospital();
-        static PatientManager patientManager = new PatientManager();
+        //static PatientManager patientManager = new PatientManager();
 
         public static void Main(string[] args)
         {
@@ -31,8 +31,8 @@ namespace SimpleHospitalManagementSystem
             neurologyClinic.AddRoom(room2);  // Expected: Room 102 added to Neurology Clinic
 
             // Create patients
-            patientManager.AddPatient(new InPatient(1, "John Doe", 30, Gender.Male, "password123", "Cardiac Arrest", doctor1,  DateTime.Now));
-            patientManager.AddPatient(new OutPatient(2, "Jane Doe", 25, Gender.Female, "mypassword", "Alice Brown", dermatologyClinic));
+            hospital.AddPatient(new InPatient(1, "John Doe", 30, Gender.Male, "password123", "Cardiac Arrest", doctor1,  DateTime.Now));
+            hospital.AddPatient(new OutPatient(2, "Jane Doe", 25, Gender.Female, "mypassword", "Alice Brown", dermatologyClinic));
             Patient inpatient1 = patientManager.GetPatientById(1); // Get InPatient John Doe
             Patient outpatient1 = patientManager.GetPatientById(2); // Get OutPatient Jane Doe
 
