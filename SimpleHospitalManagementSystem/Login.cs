@@ -8,13 +8,13 @@ namespace SimpleHospitalManagementSystem
 {
     public class Login
     {
-        private Hospital hospital;
+        public Hospital hospital;
         public Login(Hospital hospital)
         {
             this.hospital = hospital; // Inject hospital instance to access its data
         }
         // Dictionary to store credentials for patients and doctors
-        public Dictionary<int, (string Password, string Role)> users = new Dictionary<int, (string, string)>();
+        //public Dictionary<int, (string Password, string Role)> users = new Dictionary<int, (string, string)>();
         // Log in a user using their ID and password
         public string LoginUser(int id, string password)
         {
