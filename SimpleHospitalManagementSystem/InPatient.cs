@@ -19,6 +19,7 @@ namespace SimpleHospitalManagementSystem
             this.AssignedDoctor = doctor;
             this.AdmissionDate = admissionDate;
             this.AssignedRoom = null; // Initially no room assigned
+            
         }
 
         // Methods 

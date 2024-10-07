@@ -21,7 +21,7 @@ namespace SimpleHospitalManagementSystem
         public Specializations Specialization {  get; set; }
         public List<Clinic> AssignedClinics { get; set; }
         public List<Patient> PatientsList { get; set; }
-
+       
         //Constructor to initialize the attributes
         public Doctor(int DoctorID, string Name, int Age, Gender Gender, Specializations Specialization, string Password)
             : base(Name, Age, Gender, Password)
@@ -30,7 +30,7 @@ namespace SimpleHospitalManagementSystem
             this.Specialization = Specialization;
             AssignedClinics = new List<Clinic>();
             PatientsList = new List<Patient>();
-        }
+            }
         //method to add a patient to the doctor’s list
         public void AddPatient(Patient patient) 
         {

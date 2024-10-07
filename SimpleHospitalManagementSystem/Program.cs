@@ -6,7 +6,7 @@ namespace SimpleHospitalManagementSystem
     public class Program
     {            
         // Create a hospital instance
-         static Hospital hospital = new Hospital();
+        static Hospital hospital = new Hospital();
         static List<Room> availableRooms;
         static Clinic clinic;
         public static void Main(string[] args)
@@ -20,11 +20,11 @@ namespace SimpleHospitalManagementSystem
             //Clinic cardiologyClinic = new Clinic(2, "Cardiology Clinic", Specialization.Cardiology);
             //Clinic neurologyClinic = new Clinic(3, "Neurology Clinic", Specialization.Neurology);
             //Clinic dermatologyClinic = new Clinic(1, "Dermatology Clinic", Specialization.Dermatology);
-           
+
             //// Assign doctors to clinics and generate appointment slots (9 AM - 12 PM)
             //doctor1.AssignToClinic(cardiologyClinic, new DateTime(2024, 10, 5), TimeSpan.FromHours(3)); // Expected: Appointments generated for 9 AM, 10 AM, 11 AM
             //doctor2.AssignToClinic(neurologyClinic, new DateTime(2024, 10, 6), TimeSpan.FromHours(3));  // Expected: Appointments generated for 9 AM, 10 AM, 11 AM
-            
+
             //// Create rooms for clinics
             //Room room1 = new Room(101, RoomType.IPR);  // Room for in-patients
             //Room room2 = new Room(102, RoomType.OPR);  // Room for out-patients
@@ -51,10 +51,10 @@ namespace SimpleHospitalManagementSystem
             //    // Book an appointment for the out-patient in Cardiology Clinic
             //    outPatientObj.ClinicAssigned = cardiologyClinic; // Set the correct clinic
             //    cardiologyClinic.BookAppointment(outPatientObj, doctor1, new DateTime(2024, 10, 5), TimeSpan.FromHours(10)); // Expected: Appointment at 10 AM booked
-                
+
 
             //}
-            
+
             //cardiologyClinic.DisplayAvailableAppointments();
 
             //// outpatient1.BookAppointment(cardiologyClinic, new DateTime(2024, 10, 5), TimeSpan.FromHours(10)); // Expected: Appointment at 10 AM booked
@@ -87,15 +87,7 @@ namespace SimpleHospitalManagementSystem
             //cardiologyClinic.DisplayAvailableAppointments();
             //// Expected: 10 AM slot available again, 9 AM and 11 AM booked
 
-
-            loginPage();
-        }
-        private static void loginPage()
-        {
-
-
-            Login loginSystem = new Login(); // Create an instance of the Login class
-
+          
             // Register some users (Doctor and Patient) for testing
             hospital.AddPatient(new InPatient(1, "John Doe", 30, Gender.Male, "password123", "Flu", new Doctor(101, "Dr. Smith", 36, Gender.Male, Specializations.Cardiology, "123abcd"), DateTime.Now));
             hospital.AddPatient(new OutPatient(2, "Jane Doe", 25, Gender.Female, "mypassword", "Skin Allergy", new Clinic(1, "Dermatology Clinic", Specialization.Dermatology)));
@@ -103,62 +95,77 @@ namespace SimpleHospitalManagementSystem
             Doctor doctor4 = new Doctor(4, "Ali", 45, Gender.Male, Specializations.Cardiology, "123456");
             Doctor doctor2 = new Doctor(2, "Alice Brown", 38, Gender.Female, Specializations.Neurology, "123456");
             Doctor doctor3 = new Doctor(1, "Smith", 36, Gender.Male, Specializations.Dermatology, "123abcd");
+            loginPage();
+        }
+        private static void loginPage()
+        {
+            Login loginSystem = new Login(hospital); // Pass hospital instance to the login system
 
-            // Register doctors in the login system
-            loginSystem.RegisterUser(101, "123abcd", "Doctor");
-            loginSystem.RegisterUser(102, "123456", "Doctor"); 
-            
             while (true)
             {
                 Console.Clear();
                 Console.WriteLine("==== Welcome to Hospital Management System ====");
-                Console.WriteLine("Please log in:");
+                Console.WriteLine("\nAre you [1] Patient (or) [2] Doctor: ");
+                string select = Console.ReadLine();
 
-                // Prompt user for login details
-                Console.Write("Enter ID: ");
-                if (!int.TryParse(Console.ReadLine(), out int id))
+                if (select == "1" || select == "2")
                 {
-                    Console.WriteLine("Invalid ID format. Please enter a valid number.");
-                    continue;
-                }
+                    Console.WriteLine("Please log in:");
 
-                Console.Write("Enter Password: ");
-                string password = Console.ReadLine();
-
-                // Attempt to log in
-                var role = loginSystem.LoginUser(id, password);
-
-                if (role != null)
-                {
-                    Console.WriteLine($"Login successful! Welcome, {role} with ID {id}.");
-
-                    // Depending on role, show different menus
-                    if (role == "Doctor")
+                    // Prompt user for login details
+                    Console.Write("Enter ID: ");
+                    if (!int.TryParse(Console.ReadLine(), out int id))
                     {
-                        DoctorMenu();
+                        Console.WriteLine("Invalid ID format. Please enter a valid number.");
+                        continue;
                     }
-                    else if (role == "Patient")
-                    {
-                        // Get the patient using the hospital instance
-                        Patient patient = hospital.GetPatientById(id);
 
-                        if (patient != null)
+                    Console.Write("Enter Password: ");
+                    string password = Console.ReadLine();
+
+                    // Attempt to log in and get the role
+                    var role = loginSystem.LoginUser(id, password);
+
+                    if (role != null)
+                    {
+                        Console.WriteLine($"Login successful! Welcome, {role} with ID {id}.");
+
+                        // Depending on role, show different menus
+                        if (role == "Doctor")
                         {
-                            PatientMenu(patient, availableRooms, clinic);
+                            DoctorMenu();
                         }
-                        else
+                        else if (role == "Patient")
                         {
-                            Console.WriteLine("Patient not found.");
+                            // Get the patient using the hospital instance
+                            Patient patient = hospital.GetPatientById(id);
+
+                            if (patient != null)
+                            {
+                                PatientMenu(patient, availableRooms, clinic);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Patient not found.");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid ID or Password. Would you like to try again? [Y/N]");
+                        if (Console.ReadLine().ToLower() != "y")
+                        {
+                            break;  // Exit the loop if the user chooses not to retry
                         }
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid ID or Password. Press any key to try again.");
-                    Console.ReadKey();
+                    Console.WriteLine("Invalid selection. Please choose either '1' for Patient or '2' for Doctor.");
                 }
             }
         }
+
 
 
 

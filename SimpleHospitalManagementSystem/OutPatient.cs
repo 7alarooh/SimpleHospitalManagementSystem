@@ -17,6 +17,7 @@ namespace SimpleHospitalManagementSystem
             : base(patientID, name, age, gender,Password, ailment)
         {
             this.ClinicAssigned = clinicAssigned;
+           
         }
 
         //methods 
