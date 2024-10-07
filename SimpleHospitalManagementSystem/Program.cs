@@ -1,4 +1,5 @@
-﻿using static SimpleHospitalManagementSystem.Person;
+﻿using System.Numerics;
+using static SimpleHospitalManagementSystem.Person;
 using static SimpleHospitalManagementSystem.Room;
 
 namespace SimpleHospitalManagementSystem
@@ -87,7 +88,7 @@ namespace SimpleHospitalManagementSystem
             //cardiologyClinic.DisplayAvailableAppointments();
             //// Expected: 10 AM slot available again, 9 AM and 11 AM booked
 
-          
+
             // Register some users (Doctor and Patient) for testing
             hospital.AddPatient(new InPatient(1, "John Doe", 30, Gender.Male, "password123", "Flu", new Doctor(101, "Dr. Smith", 36, Gender.Male, Specializations.Cardiology, "123abcd"), DateTime.Now));
             hospital.AddPatient(new OutPatient(2, "Jane Doe", 25, Gender.Female, "mypassword", "Skin Allergy", new Clinic(1, "Dermatology Clinic", Specialization.Dermatology)));
@@ -133,7 +134,17 @@ namespace SimpleHospitalManagementSystem
                         // Depending on role, show different menus
                         if (role == "Doctor")
                         {
-                            DoctorMenu();
+                            // Get the doctor object using the hospital instance
+                            Doctor doctor = hospital.GetDoctorById(id);
+
+                            if (doctor != null)
+                            {
+                                DoctorMenu(hospital, doctor); // Pass the doctor to the DoctorMenu
+                            }
+                            else
+                            {
+                                Console.WriteLine("Doctor not found.");
+                            }
                         }
                         else if (role == "Patient")
                         {
@@ -370,16 +381,276 @@ namespace SimpleHospitalManagementSystem
 
 
         // Method to display Doctor menu
-        static void DoctorMenu()
+        static void DoctorMenu(Hospital hospital, Doctor doctor)
         {
-            Console.Clear();
-            Console.WriteLine("==== Doctor Dashboard ====");
-            Console.WriteLine("1. View patient list");
-            Console.WriteLine("2. Add patient");
-            Console.WriteLine("3. Remove patient");
-            Console.WriteLine("4. Logout");
-            // Implement doctor-specific functionalities here
-            Console.ReadKey();
+            int choice;
+            do
+            {
+                Console.WriteLine("\n--- Doctor Menu ---");
+                Console.WriteLine("1. View Assigned Patients");
+                Console.WriteLine("2. View Available Rooms");
+                Console.WriteLine("3. Assign Room to Patient");
+                Console.WriteLine("4. Vacate Room for Patient");
+                Console.WriteLine("5. Manage Appointments");
+                Console.WriteLine("6. Exit");
+
+                Console.Write("Enter your choice: ");
+                choice = Convert.ToInt32(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        ViewAssignedPatients(hospital, doctor);
+                        break;
+                    case 2:
+                        ViewAvailableRooms(hospital, doctor);
+                        break;
+                    case 3:
+                        AssignRoomToPatient(hospital, doctor);
+                        break;
+                    case 4:
+                        VacateRoomForPatient(hospital, doctor);
+                        break;
+                    case 5:
+                        ManageAppointments(hospital, doctor);
+                        break;
+                    case 6:
+                        Console.WriteLine("Exiting the Doctor Menu.");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+
+            } while (choice != 6);
+        }
+
+        // Function to view assigned patients
+        public static void ViewAssignedPatients(Hospital hospital, Doctor doctor)
+        {
+            hospital.GetDoctorPatients(doctor);
+        }
+
+        // Function to view available rooms in the hospital
+        public static void ViewAvailableRooms(Hospital hospital, Doctor doctor)
+        {
+            Console.WriteLine("Available Rooms:");
+            foreach (var room in hospital.RoomsList)
+            {
+                if (!room.IsOccupied)
+                {
+                    room.DisplayRoomInfo();
+                }
+            }
+        }
+
+        // Function to assign a room to a patient
+        public static void AssignRoomToPatient(Hospital hospital, Doctor doctor)
+        {
+            Console.Write("Enter the patient ID to assign a room: ");
+            int patientId = Convert.ToInt32(Console.ReadLine());
+            Patient patient = hospital.GetPatientById(patientId);
+
+            if (patient == null)
+            {
+                Console.WriteLine("Patient not found.");
+                return;
+            }
+            // Check if the patient is an in-patient before assigning a room
+            if (patient is InPatient inPatient)
+            {
+                Console.WriteLine("Available Rooms:");
+                foreach (var room in hospital.RoomsList)
+                {
+                    if (!room.IsOccupied)
+                    {
+                        room.DisplayRoomInfo();
+                    }
+                }
+
+                // Display available rooms
+                Console.WriteLine("Available Rooms:");
+                foreach (var room in hospital.RoomsList)
+                {
+                    if (!room.IsOccupied)
+                    {
+                        room.DisplayRoomInfo();
+                    }
+                }
+
+                Console.Write("Enter the room number to assign: ");
+                int roomNumber = Convert.ToInt32(Console.ReadLine());
+                Room roomToAssign = hospital.RoomsList.FirstOrDefault(r => r.RoomNumber == roomNumber && !r.IsOccupied);
+
+                if (roomToAssign != null)
+                {
+                    roomToAssign.OccupyRoom();
+                    inPatient.AssignRoom(roomToAssign);
+                    Console.WriteLine($"Room {roomNumber} assigned to Patient {patient.Name}.");
+                }
+                else
+                {
+                    Console.WriteLine("Room is not available or doesn't exist.");
+                }
+            }
+            else { Console.WriteLine("Room assignment is only available for in-patients."); }
+        }
+
+        // Function to vacate a room for a patient
+        public static void VacateRoomForPatient(Hospital hospital, Doctor doctor)
+        {
+            Console.Write("Enter the patient ID to vacate the room: ");
+            int patientId = Convert.ToInt32(Console.ReadLine());
+            Patient patient = hospital.GetPatientById(patientId);
+            if (patient is InPatient inPatient)
+            {
+                if (inPatient != null && inPatient.AssignedRoom != null)
+                {
+                    inPatient.AssignedRoom.VacateRoom();
+                    inPatient.AssignRoom(null);
+                    Console.WriteLine($"Room vacated for Patient {patient.Name}.");
+                }
+                else
+                {
+                    Console.WriteLine("Patient has no room assigned.");
+                }
+            }
+        }
+
+        // Function to manage appointments for the doctor
+        public static void ManageAppointments(Hospital hospital, Doctor doctor)
+        {
+            Console.WriteLine("\n--- Manage Appointments ---");
+            Console.WriteLine("1. View Available Appointments");
+            Console.WriteLine("2. Schedule Appointment");
+            Console.WriteLine("3. Cancel Appointment");
+            Console.WriteLine("4. Back");
+
+            Console.Write("Enter your choice: ");
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    // Assuming 'doctor' is an instance of the Doctor class
+                    foreach (var clinic in doctor.AssignedClinics)
+                    {
+                        Console.WriteLine($"Available appointments at {clinic.ClinicName}:");
+                        clinic.DisplayAvailableAppointments(); // Call the method for each assigned clinic
+                    }
+                    break;
+                case 2:
+                    ScheduleAppointmentForPatient(hospital, doctor);
+                    break;
+                case 3:
+                    CancelAppointmentForPatient(hospital, doctor);
+                    break;
+                case 4:
+                    Console.WriteLine("Returning to the main menu.");
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+
+        public static void ScheduleAppointmentForPatient(Hospital hospital, Doctor doctor)
+        {
+            Console.Write("Enter the patient ID to schedule an appointment: ");
+            int patientId = Convert.ToInt32(Console.ReadLine());
+            Patient patient = hospital.GetPatientById(patientId);
+
+            if (patient != null)
+            {
+                Console.Write("Enter appointment date (YYYY-MM-DD): ");
+                DateTime appointmentDay = DateTime.Parse(Console.ReadLine());
+                Console.Write("Enter appointment time (HH:MM): ");
+                TimeSpan appointmentTime = TimeSpan.Parse(Console.ReadLine());
+                // Check if the doctor has assigned clinics
+                if (doctor.AssignedClinics.Count > 0)
+                {
+                    // Display assigned clinics
+                    Console.WriteLine("Assigned Clinics:");
+                    for (int i = 0; i < doctor.AssignedClinics.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {doctor.AssignedClinics[i].ClinicName}");
+                    }
+                    Console.Write("Select a clinic by number: ");
+                    int clinicChoice = Convert.ToInt32(Console.ReadLine());
+
+                    // Validate the clinic choice
+                    if (clinicChoice > 0 && clinicChoice <= doctor.AssignedClinics.Count)
+                    {
+                        Clinic selectedClinic = doctor.AssignedClinics[clinicChoice - 1]; // Get the selected clinic
+
+                        // Schedule the appointment at the selected clinic
+                        selectedClinic.BookAppointment(patient, doctor, appointmentDay, appointmentTime);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid clinic selection.");
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("Doctor has no assigned clinics.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Patient not found.");
+            }
+        }
+
+        public static void CancelAppointmentForPatient(Hospital hospital, Doctor doctor)
+        {
+            Console.Write("Enter the patient ID to cancel an appointment: ");
+            int patientId = Convert.ToInt32(Console.ReadLine());
+            Patient patient = hospital.GetPatientById(patientId);
+
+            if (patient != null)
+            {
+                Console.Write("Enter appointment date (YYYY-MM-DD): ");
+                DateTime appointmentDay = DateTime.Parse(Console.ReadLine());
+                Console.Write("Enter appointment time (HH:MM): ");
+                TimeSpan appointmentTime = TimeSpan.Parse(Console.ReadLine());
+
+                // Check if the doctor has assigned clinics
+                if (doctor.AssignedClinics.Count > 0)
+                {
+                    // Display assigned clinics
+                    Console.WriteLine("Assigned Clinics:");
+                    for (int i = 0; i < doctor.AssignedClinics.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {doctor.AssignedClinics[i].ClinicName}");
+                    }
+                    Console.Write("Select a clinic by number: ");
+                    int clinicChoice = Convert.ToInt32(Console.ReadLine());
+
+                    // Validate the clinic choice
+                    if (clinicChoice > 0 && clinicChoice <= doctor.AssignedClinics.Count)
+                    {
+                        Clinic selectedClinic = doctor.AssignedClinics[clinicChoice - 1]; // Get the selected clinic
+
+                        // Cancel the appointment at the selected clinic
+                        selectedClinic.CancelAppointment(patient, doctor, appointmentDay, appointmentTime);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid clinic selection.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Doctor has no assigned clinics.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Patient not found.");
+            }
         }
     }
+
 }

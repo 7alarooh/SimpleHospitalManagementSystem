@@ -40,7 +40,7 @@ namespace SimpleHospitalManagementSystem
         public void VacateRoom()
         {
             if (!IsOccupied) { Console.WriteLine($"Room {RoomNumber} is already vacant."); }
-            else { IsOccupied = false; Console.WriteLine($"Room {RoomNumber} is now vacanted."); }
+            else { IsOccupied = false; Console.WriteLine($"Room {RoomNumber} is now vacant."); }
         }
         // Method to display room information
         public void DisplayRoomInfo()

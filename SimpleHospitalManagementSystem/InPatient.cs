@@ -26,8 +26,27 @@ namespace SimpleHospitalManagementSystem
         // Method to assign a room to the in-patient
         public void AssignRoom(Room room)
         {
+            if (room == null)
+            {
+                throw new ArgumentException("Room cannot be null.");
+            }
+
             AssignedRoom = room;
-            Console.WriteLine($"Room {room.RoomNumber} assigned to patient {Name}.");
+            room.OccupyRoom(); // Mark room as occupied
+            Console.WriteLine($"Room {room.RoomNumber} has been assigned to {Name}.");
+        }
+        public void VacateRoom()
+        {
+            if (AssignedRoom != null)
+            {
+                AssignedRoom.VacateRoom(); // Vacate the room
+                Console.WriteLine($"Room {AssignedRoom.RoomNumber} has been vacated from patient {Name}.");
+                AssignedRoom = null; // Clear the assigned room
+            }
+            else
+            {
+                Console.WriteLine($"Patient {Name} does not have an assigned room.");
+            }
         }
         // Method to discharge the patient and free the room
         public void Discharge()

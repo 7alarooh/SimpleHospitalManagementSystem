@@ -57,7 +57,7 @@ namespace SimpleHospitalManagementSystem
             for (int i = 0; i < period.TotalHours; i++)
             {
                 DateTime appointmentTime = appointmentDay.AddHours(i);
-                Appointment appointment = new Appointment(null)  // No patient assigned yet
+                Appointment appointment = new Appointment(null) // No patient assigned yet
                 {
                     AppointmentDate = appointmentTime.Date,
                     AppointmentTime = TimeSpan.FromHours(i + 9), // Appointment times starting from 9:00 AM

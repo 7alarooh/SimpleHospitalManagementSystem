@@ -12,14 +12,17 @@ namespace SimpleHospitalManagementSystem
         //Attributes specific to patient
         public int PatientID { get; set; }
         public string Ailment { get; set; }
-       
+        // Existing properties
+       // public string MedicalHistory { get; set; }
+        // New property to hold the assigned room
+
         //Constructor to initialize the attributes and assign a doctor
         public Patient(int patientID, string name, int age, Gender gender,string Password, string ailment)
              : base(name, age, gender, Password)
         {
-            this.PatientID = patientID;
-            this.Ailment = ailment;
-            
+            PatientID = patientID;
+            Ailment = ailment;
+           // MedicalHistory = medicalHistory;
         }
 
 
