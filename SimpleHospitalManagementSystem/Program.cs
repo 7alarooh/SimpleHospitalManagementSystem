@@ -144,7 +144,7 @@ namespace SimpleHospitalManagementSystem
                             Console.WriteLine("\nAvailable Rooms:");
                             foreach (var room in availableRooms)
                             {
-                                room.DisplayRoomInfo(); // Display available rooms
+                                room.DisplayInfo(); // Display available rooms
                             }
                             Console.Write("\nEnter room number to assign: ");
                             if (int.TryParse(Console.ReadLine(), out int roomNumber))
@@ -152,7 +152,7 @@ namespace SimpleHospitalManagementSystem
                                 Room assignedRoom = availableRooms.Find(r => r.RoomNumber == roomNumber);
                                 if (assignedRoom != null)
                                 {
-                                    if (!assignedRoom.IsOccupied)
+                                    if (!assignedRoom.isOccupied)
                                     {
                                         inPatient.AssignRoom(assignedRoom);  // Assign room to in-patient
                                         Console.WriteLine($"Room {assignedRoom.RoomNumber} assigned to patient {patient.Name}.");
@@ -279,7 +279,7 @@ namespace SimpleHospitalManagementSystem
                         if (appointment != null)
                         {
                             // Display appointment details for the appointment instance
-                            appointment.DisplayAppointmentDetails();
+                            appointment.DisplayInfo();
                         }
                         else
                         {
@@ -291,7 +291,7 @@ namespace SimpleHospitalManagementSystem
                         // Display the patient's assigned room info (for in-patients only)
                         if (patient is InPatient inPatientRoomInfo && inPatientRoomInfo.AssignedRoom != null)
                         {
-                            inPatientRoomInfo.AssignedRoom.DisplayRoomInfo();  // Show room info
+                            inPatientRoomInfo.AssignedRoom.DisplayInfo();  // Show room info
                         }
                         else
                         {
@@ -368,15 +368,15 @@ namespace SimpleHospitalManagementSystem
             Console.WriteLine("Available Rooms:");
             foreach (var room in hospital.RoomsList)
             {
-                if (!room.IsOccupied)
+                if (!room.isOccupied)
                 {
-                    room.DisplayRoomInfo();
+                    room.DisplayInfo();
                 }
             }
         }
 
         // Function to assign a room to a patient
-        public static void AssignRoomToPatient(Hospital hospital, Doctor doctor)
+        public static void AssignRoomToPatient(Hospital hospital, Doctor doctor)    
         {
             Console.Write("Enter the patient ID to assign a room: ");
             int patientId = Convert.ToInt32(Console.ReadLine());
@@ -393,9 +393,9 @@ namespace SimpleHospitalManagementSystem
                 Console.WriteLine("Available Rooms:");
                 foreach (var room in hospital.RoomsList)
                 {
-                    if (!room.IsOccupied)
+                    if (!room.isOccupied)
                     {
-                        room.DisplayRoomInfo();
+                        room.DisplayInfo();
                     }
                 }
 
@@ -403,15 +403,15 @@ namespace SimpleHospitalManagementSystem
                 Console.WriteLine("Available Rooms:");
                 foreach (var room in hospital.RoomsList)
                 {
-                    if (!room.IsOccupied)
+                    if (!room.isOccupied)
                     {
-                        room.DisplayRoomInfo();
+                        room.DisplayInfo();
                     }
                 }
 
                 Console.Write("Enter the room number to assign: ");
                 int roomNumber = Convert.ToInt32(Console.ReadLine());
-                Room roomToAssign = hospital.RoomsList.FirstOrDefault(r => r.RoomNumber == roomNumber && !r.IsOccupied);
+                Room roomToAssign = hospital.RoomsList.FirstOrDefault(r => r.RoomNumber == roomNumber && !r.isOccupied);
 
                 if (roomToAssign != null)
                 {
@@ -427,8 +427,8 @@ namespace SimpleHospitalManagementSystem
             else { Console.WriteLine("Room assignment is only available for in-patients."); }
         }
 
-        // Function to vacate a room for a patient
-        public static void VacateRoomForPatient(Hospital hospital, Doctor doctor)
+            // Function to vacate a room for a patient
+            public static void VacateRoomForPatient(Hospital hospital, Doctor doctor)
         {
             Console.Write("Enter the patient ID to vacate the room: ");
             int patientId = Convert.ToInt32(Console.ReadLine());
@@ -467,7 +467,7 @@ namespace SimpleHospitalManagementSystem
                     foreach (var clinic in doctor.AssignedClinics)
                     {
                         Console.WriteLine($"Available appointments at {clinic.ClinicName}:");
-                        clinic.DisplayAvailableAppointments(); // Call the method for each assigned clinic
+                        clinic.DisplayInfo(); // Call the method for each assigned clinic
                     }
                     break;
                 case 2:

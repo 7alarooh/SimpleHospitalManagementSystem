@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SimpleHospitalManagementSystem
 {
     public enum Gender { Male, Female }
-    public class Person
+    public class Person: IDisplayInfo
     {
         //Attributes
         public string Name{get; set;}

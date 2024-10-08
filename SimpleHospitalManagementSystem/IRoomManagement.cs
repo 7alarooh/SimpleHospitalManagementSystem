@@ -8,16 +8,15 @@ namespace SimpleHospitalManagementSystem
 {
     public interface IRoomManagement
     {
+        public bool isOccupied { get; set; }// tracks whether the room is occupied
         // Marks a room as occupied
-    void OccupyRoom();
+        void OccupyRoom();
 
         // Marks a room as available
         void VacateRoom();
 
         // Checks the occupancy status of the room
-        bool IsOccupied();
+        bool IsRoomOccupied();
 
-        // Optional: Display room information (could be useful for UI purposes)
-        void DisplayRoomInfo();
     }
 }

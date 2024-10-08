@@ -13,7 +13,7 @@ namespace SimpleHospitalManagementSystem
         Neurology,
         Dermatology
     }
-    public class Clinic
+    public class Clinic: IDisplayInfo
     {
         // Attributes
         public int ClinicID { get;  set; }  
@@ -124,7 +124,7 @@ namespace SimpleHospitalManagementSystem
             }
         }
         // Method to display all available appointments for the clinic, organized by doctor and time slot
-        public void DisplayAvailableAppointments()
+        public void DisplayInfo()
         {
             foreach (var doctorAppointments in AvailableAppointments)
             {

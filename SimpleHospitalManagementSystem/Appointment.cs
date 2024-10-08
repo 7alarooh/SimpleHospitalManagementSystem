@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SimpleHospitalManagementSystem
 {
-    public class Appointment
+    public class Appointment: IDisplayInfo
     {
 
         //attributes
@@ -53,7 +53,7 @@ namespace SimpleHospitalManagementSystem
         }
 
         //this method to displays appointment details.
-        public void DisplayAppointmentDetails()
+        public void DisplayInfo()
         {
             if (!IsBooked)
             {
