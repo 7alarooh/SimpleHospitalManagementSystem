@@ -16,6 +16,7 @@ namespace SimpleHospitalManagementSystem
     public class Doctor:Person
     {
         
+
         //Attributes specific to doctor
         public int DoctorID { get; set; }   
         public Specializations Specialization {  get; set; }

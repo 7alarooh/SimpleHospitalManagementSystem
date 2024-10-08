@@ -90,12 +90,12 @@ namespace SimpleHospitalManagementSystem
 
 
             // Register some users (Doctor and Patient) for testing
-            hospital.AddPatient(new InPatient(1, "John Doe", 30, Gender.Male, "password123", "Flu", new Doctor(101, "Dr. Smith", 36, Gender.Male, Specializations.Cardiology, "123abcd"), DateTime.Now));
-            hospital.AddPatient(new OutPatient(2, "Jane Doe", 25, Gender.Female, "mypassword", "Skin Allergy", new Clinic(1, "Dermatology Clinic", Specialization.Dermatology)));
-            hospital.AddDoctor (new Doctor(3, "John Smith", 45, Gender.Male, Specializations.Cardiology, "123456"));
-            hospital.AddDoctor(new Doctor(4, "Ali", 45, Gender.Male, Specializations.Cardiology, "123456"));
-            hospital.AddDoctor(new Doctor(2, "Alice Brown", 38, Gender.Female, Specializations.Neurology, "123456"));
-            hospital.AddDoctor(new Doctor(1, "Smith", 36, Gender.Male, Specializations.Dermatology, "123abcd"));
+            //hospital.AddPatient(new InPatient(1, "John Doe", 30, Gender.Male, "password123", "Flu", new Doctor(101, "Dr. Smith", 36, Gender.Male, Specializations.Cardiology, "123abcd"), DateTime.Now));
+            //hospital.AddPatient(new OutPatient(2, "Jane Doe", 25, Gender.Female, "mypassword", "Skin Allergy", new Clinic(1, "Dermatology Clinic", Specialization.Dermatology)));
+            //hospital.AddDoctor (new Doctor(3, "John Smith", 45, Gender.Male, Specializations.Cardiology, "123456"));
+            //hospital.AddDoctor(new Doctor(4, "Ali", 45, Gender.Male, Specializations.Cardiology, "123456"));
+            //hospital.AddDoctor(new Doctor(2, "Alice Brown", 38, Gender.Female, Specializations.Neurology, "123456"));
+            //hospital.AddDoctor(new Doctor(1, "Smith", 36, Gender.Male, Specializations.Dermatology, "123abcd"));
             loginPage();
         }
         private static void loginPage()

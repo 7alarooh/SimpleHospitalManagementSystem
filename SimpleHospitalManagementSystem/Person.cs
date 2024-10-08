@@ -10,8 +10,8 @@ namespace SimpleHospitalManagementSystem
     public class Person
     {
         //Attributes
-        public string Name{get;private set;}
-        public int Age { get; private set; }
+        public string Name{get; set;}
+        public int Age { get;  set; }
         public Gender GenderType { get; private set; }
         public string Password { get; set; } // New attribute for login
 

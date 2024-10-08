@@ -12,7 +12,7 @@ namespace SimpleHospitalManagementSystem
     public class Hospital
     {
         //Attributes
-
+        // Dictionary to store doctors with their IDs as the key
         public Dictionary<int, Doctor> Doctors;
         // Dictionary to store patients with their IDs as the key
         public Dictionary<int, Patient> patients;
@@ -28,32 +28,32 @@ namespace SimpleHospitalManagementSystem
         }
 
         //this method to add a new doctor
-        public void AddDoctor(Doctor doctor) 
-        {
-            if (!Doctors.ContainsKey(doctor.DoctorID))
-            {
-                Doctors.Add(doctor.DoctorID, doctor);
-                Console.WriteLine($"Doctor {doctor.Name} added with ID {doctor.DoctorID}.");
-            }
-            else
-            {
-                Console.WriteLine($"Doctor with ID {doctor.DoctorID} already exists.");
-            }
-           }
+        //public void AddDoctor(Doctor doctor) 
+        //{
+        //    if (!Doctors.ContainsKey(doctor.DoctorID))
+        //    {
+        //        Doctors.Add(doctor.DoctorID, doctor);
+        //        Console.WriteLine($"Doctor {doctor.Name} added with ID {doctor.DoctorID}.");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine($"Doctor with ID {doctor.DoctorID} already exists.");
+        //    }
+        //   }
 
         //this method to add a new patient
-        public void AddPatient(Patient patient) 
-        {
-            if (!patients.ContainsKey(patient.PatientID))
-            {
-                patients.Add(patient.PatientID, patient);
-                Console.WriteLine($"Patient {patient.Name} added with ID {patient.PatientID}.");
-            }
-            else
-            {
-                Console.WriteLine($"Patient with ID {patient.PatientID} already exists.");
-            }
-        }
+        //public void AddPatient(Patient patient) 
+        //{
+        //    if (!patients.ContainsKey(patient.PatientID))
+        //    {
+        //        patients.Add(patient.PatientID, patient);
+        //        Console.WriteLine($"Patient {patient.Name} added with ID {patient.PatientID}.");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine($"Patient with ID {patient.PatientID} already exists.");
+        //    }
+        //}
         // Method to get a patient by their ID
         public Patient GetPatientById(int id)
         {
@@ -107,7 +107,8 @@ namespace SimpleHospitalManagementSystem
             }
             else { Console.WriteLine($"Dr.{doctor} has no patients assigned."); }
         }
-       
 
+
+        //////////////////////////
     }
 }
