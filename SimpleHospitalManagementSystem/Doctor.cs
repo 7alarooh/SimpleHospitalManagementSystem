@@ -13,7 +13,7 @@ namespace SimpleHospitalManagementSystem
         Neurology,
         Dermatology
     }
-    public class Doctor:Person
+    public class Doctor:Person, IInPatientCare, IOutPatientCare
     {
         
 
@@ -93,6 +93,29 @@ namespace SimpleHospitalManagementSystem
             Console.WriteLine($"Doctor {Name} assigned to {clinic.ClinicName} on {day} for {period.TotalHours} hours, starting at 9:00 AM.");
         }
         //Override the DisplayInfo() method to include PatientID and Ailment
+        // Implementing ProvideCare method from IPatientCare
+        public void ProvideCare(Patient patient)
+        {
+            Console.WriteLine($"Providing care to patient: {patient.Name}");
+        }
+        // Implementing AssignRoom method from IInPatientCare
+        public void AssignRoom(InPatient patient, Room room)
+        {
+            patient.AssignRoom(room);
+            Console.WriteLine($"Room assigned to in-patient: {patient.Name}");
+        }
+        // Implementing DischargePatient method from IInPatientCare
+        public void DischargePatient(InPatient patient)
+        {
+            patient.Discharge();
+            Console.WriteLine($"Patient discharged: {patient.Name}");
+        }
+        // Implementing ScheduleFollowUp method from IOutPatientCare
+        public void ScheduleFollowUp(OutPatient patient)
+        {
+            Console.WriteLine($"Follow-up appointment scheduled for: {patient.Name}");
+            // You could implement additional logic here to handle scheduling
+        }
         public override void DisplayInfo() 
         {
             base.DisplayInfo();
