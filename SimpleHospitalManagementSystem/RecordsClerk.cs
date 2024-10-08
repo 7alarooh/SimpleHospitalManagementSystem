@@ -125,6 +125,11 @@ namespace SimpleHospitalManagementSystem
                 Console.WriteLine("Patient not found.");
             }
         }
+        public virtual void DisplayInfo()
+        {
+            base.DisplayInfo();
+            Console.WriteLine($"Records Clerk ID: {ClerkID} ");
+        }
 
     }
 }
