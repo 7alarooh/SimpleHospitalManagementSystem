@@ -23,6 +23,13 @@ namespace SimpleHospitalManagementSystem
                 return "Doctor";
             }
 
+            // Check if the user is a Records Clerk
+            RecordsClerk RClerk = hospital.GetRecordsClerkById(id);
+            if (RClerk != null && RClerk.Password == password)
+            {
+                return "RecordsClerk";
+            }
+
             // Check if the user is a patient
             Patient patient = hospital.GetPatientById(id);
             if (patient != null && patient.Password == password)

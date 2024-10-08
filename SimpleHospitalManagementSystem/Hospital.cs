@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace SimpleHospitalManagementSystem
 {
-    
+
     public class Hospital
     {
         //Attributes
@@ -16,45 +16,31 @@ namespace SimpleHospitalManagementSystem
         public Dictionary<int, Doctor> Doctors;
         // Dictionary to store patients with their IDs as the key
         public Dictionary<int, Patient> patients;
-
+        //RecordsClerk
+        public Dictionary<int, RecordsClerk> RecordsClerks;
         public List<Room> RoomsList { get; set; }
 
         //Constructor initializes the lists
-        public Hospital() 
+        public Hospital()
         {
             Doctors = new Dictionary<int, Doctor>();
             patients = new Dictionary<int, Patient>();
             RoomsList = new List<Room>();
+            RecordsClerks = new Dictionary<int, RecordsClerk>();
+        }
+        public RecordsClerk GetRecordsClerkById(int id)
+        {
+            if (RecordsClerks.ContainsKey(id))
+            {
+                return RecordsClerks[id];
+            }
+            else
+            {
+                Console.WriteLine($"No Records Clerk found with ID {id}.");
+                return null;
+            }
         }
 
-        //this method to add a new doctor
-        //public void AddDoctor(Doctor doctor) 
-        //{
-        //    if (!Doctors.ContainsKey(doctor.DoctorID))
-        //    {
-        //        Doctors.Add(doctor.DoctorID, doctor);
-        //        Console.WriteLine($"Doctor {doctor.Name} added with ID {doctor.DoctorID}.");
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine($"Doctor with ID {doctor.DoctorID} already exists.");
-        //    }
-        //   }
-
-        //this method to add a new patient
-        //public void AddPatient(Patient patient) 
-        //{
-        //    if (!patients.ContainsKey(patient.PatientID))
-        //    {
-        //        patients.Add(patient.PatientID, patient);
-        //        Console.WriteLine($"Patient {patient.Name} added with ID {patient.PatientID}.");
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine($"Patient with ID {patient.PatientID} already exists.");
-        //    }
-        //}
-        // Method to get a patient by their ID
         public Patient GetPatientById(int id)
         {
             if (patients.ContainsKey(id))
@@ -68,7 +54,8 @@ namespace SimpleHospitalManagementSystem
             }
         }
 
-        public Doctor GetDoctorById(int id) {
+        public Doctor GetDoctorById(int id)
+        {
             if (Doctors.ContainsKey(id))
             {
                 return Doctors[id];
@@ -95,7 +82,7 @@ namespace SimpleHospitalManagementSystem
         //}
 
         // this method to displays all patients assigned to a specific doctor
-        public void GetDoctorPatients(Doctor doctor) 
+        public void GetDoctorPatients(Doctor doctor)
         {
             if (Doctors.Count > 0)
             {
@@ -107,8 +94,20 @@ namespace SimpleHospitalManagementSystem
             }
             else { Console.WriteLine($"Dr.{doctor} has no patients assigned."); }
         }
+        public void AddRecordsClerk(int id, string name, int age, Gender gender, string password)
+        {
+            if (!RecordsClerks.ContainsKey(id))
+            {
+                RecordsClerk newClerk = new RecordsClerk(id, name, age, gender, password);
+                RecordsClerks.Add(id, newClerk);
+                Console.WriteLine($"Records Clerk {name} added successfully with ID {id}.");
+            }
+            else
+            {
+                Console.WriteLine($"A Records Clerk with ID {id} already exists.");
+            }
 
-
-        //////////////////////////
+            //////////////////////////
+        }
     }
 }

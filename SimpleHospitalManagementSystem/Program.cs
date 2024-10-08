@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using System.Runtime.ConstrainedExecution;
 using static SimpleHospitalManagementSystem.Person;
 using static SimpleHospitalManagementSystem.Room;
 
@@ -12,90 +13,10 @@ namespace SimpleHospitalManagementSystem
         static Clinic clinic;
         public static void Main(string[] args)
         {
-            //// Create doctors
-            //Doctor doctor1 = new Doctor(3, "John Smith", 45, Gender.Male, Specializations.Cardiology,"123456");
-            //Doctor doctor4 = new Doctor(3, "Ali", 45, Gender.Male, Specializations.Cardiology, "123456");
-            //Doctor doctor2 = new Doctor(2, "Alice Brown", 38, Gender.Female, Specializations.Neurology,"123456");
-            //Doctor doctor3 = new Doctor(1, "Smith", 36, Gender.Male, Specializations.Dermatology, "123abcd");
-            //// Create clinics
-            //Clinic cardiologyClinic = new Clinic(2, "Cardiology Clinic", Specialization.Cardiology);
-            //Clinic neurologyClinic = new Clinic(3, "Neurology Clinic", Specialization.Neurology);
-            //Clinic dermatologyClinic = new Clinic(1, "Dermatology Clinic", Specialization.Dermatology);
-
-            //// Assign doctors to clinics and generate appointment slots (9 AM - 12 PM)
-            //doctor1.AssignToClinic(cardiologyClinic, new DateTime(2024, 10, 5), TimeSpan.FromHours(3)); // Expected: Appointments generated for 9 AM, 10 AM, 11 AM
-            //doctor2.AssignToClinic(neurologyClinic, new DateTime(2024, 10, 6), TimeSpan.FromHours(3));  // Expected: Appointments generated for 9 AM, 10 AM, 11 AM
-
-            //// Create rooms for clinics
-            //Room room1 = new Room(101, RoomType.IPR);  // Room for in-patients
-            //Room room2 = new Room(102, RoomType.OPR);  // Room for out-patients
-            //cardiologyClinic.AddRoom(room1); // Expected: Room 101 added to Cardiology Clinic
-            //neurologyClinic.AddRoom(room2);  // Expected: Room 102 added to Neurology Clinic
-
-            //// Create patients
-            //hospital.AddPatient(new InPatient(1, "John Doe", 30, Gender.Male, "password123", "Cardiac Arrest", doctor1,  DateTime.Now));
-            //hospital.AddPatient(new OutPatient(2, "Jane Doe", 25, Gender.Female, "mypassword", "Alice Brown", dermatologyClinic));
-            //Patient inpatient1 = hospital.GetPatientById(1); // Get InPatient John Doe
-            //Patient outpatient1 = hospital.GetPatientById(2); // Get OutPatient Jane Doe
-
-            //// Assign room to in-patient
-            ////inpatient1.AssignRoom(room1); // Expected: Room 101 becomes occupied
-            //if (inpatient1 is InPatient inPatientObj)
-            //{
-            //    // Assign a room to the in-patient
-            //    inPatientObj.AssignRoom(room1); // Expected: Room 101 becomes occupied
-            //}
-
-            //// Book an appointment for out-patient in Cardiology Clinic
-            //if (outpatient1 is OutPatient outPatientObj)
-            //{
-            //    // Book an appointment for the out-patient in Cardiology Clinic
-            //    outPatientObj.ClinicAssigned = cardiologyClinic; // Set the correct clinic
-            //    cardiologyClinic.BookAppointment(outPatientObj, doctor1, new DateTime(2024, 10, 5), TimeSpan.FromHours(10)); // Expected: Appointment at 10 AM booked
-
-
-            //}
-
-            //cardiologyClinic.DisplayAvailableAppointments();
-
-            //// outpatient1.BookAppointment(cardiologyClinic, new DateTime(2024, 10, 5), TimeSpan.FromHours(10)); // Expected: Appointment at 10 AM booked
-            //// View doctor's assigned clinics
-            //doctor1.DisplayAssignedClinics(); // Expected: Cardiology Clinic is displayed
-            //                                  // View available appointments in Cardiology Clinic
-            //cardiologyClinic.DisplayAvailableAppointments();
-            //// Expected: Show available slots for Dr. John Smith at 9 AM, 11 AM (10 AM is booked)
-            //// Discharge in-patient
-            //if (inpatient1 is InPatient inPatientOb)
-            //{
-            //    inPatientOb.Discharge(); 
-            //}
-            //// inpatient1.Discharge(); // Expected: Room 101 becomes available, patient discharged
-            //// Book another appointment for the same out-patient in Cardiology Clinic
-            //if (outpatient1 is OutPatient outPatientObj1)
-            //{
-            //    cardiologyClinic.BookAppointment(outPatientObj1, doctor1,new DateTime(2024, 10, 5), TimeSpan.FromHours(11)); // Expected: Appointment at 11 AM booked
-            //                                                                                                      // Try booking a time outside available slots
-            //}
-            //// outpatient1.BookAppointment(cardiologyClinic, new DateTime(2024, 10, 5), TimeSpan.FromHours(12));
-            //// Expected: No available appointments for this time
-            //// Cancel an appointment
-            //if (outpatient1 is OutPatient outPatientObj2)
-            //{
-            //    cardiologyClinic.CancelAppointment(outPatientObj2, doctor1, new DateTime(2024, 10, 5), TimeSpan.FromHours(11));
-            //}
-            //// Expected: Appointment cancellation message for 10 AM
-            //// View available appointments after booking and cancellation
-            //cardiologyClinic.DisplayAvailableAppointments();
-            //// Expected: 10 AM slot available again, 9 AM and 11 AM booked
-
-
-            // Register some users (Doctor and Patient) for testing
-            //hospital.AddPatient(new InPatient(1, "John Doe", 30, Gender.Male, "password123", "Flu", new Doctor(101, "Dr. Smith", 36, Gender.Male, Specializations.Cardiology, "123abcd"), DateTime.Now));
-            //hospital.AddPatient(new OutPatient(2, "Jane Doe", 25, Gender.Female, "mypassword", "Skin Allergy", new Clinic(1, "Dermatology Clinic", Specialization.Dermatology)));
-            //hospital.AddDoctor (new Doctor(3, "John Smith", 45, Gender.Male, Specializations.Cardiology, "123456"));
-            //hospital.AddDoctor(new Doctor(4, "Ali", 45, Gender.Male, Specializations.Cardiology, "123456"));
-            //hospital.AddDoctor(new Doctor(2, "Alice Brown", 38, Gender.Female, Specializations.Neurology, "123456"));
-            //hospital.AddDoctor(new Doctor(1, "Smith", 36, Gender.Male, Specializations.Dermatology, "123abcd"));
+            
+            
+            hospital.AddRecordsClerk(1001, "Alice Johnson", 28, Gender.Female, "123456");
+            hospital.AddRecordsClerk(1002, "Omar Khalid", 28, Gender.Male, "123456");
             loginPage();
         }
         private static void loginPage()
@@ -106,10 +27,10 @@ namespace SimpleHospitalManagementSystem
             {
                 Console.Clear();
                 Console.WriteLine("==== Welcome to Hospital Management System ====");
-                Console.WriteLine("\nAre you [1] Patient (or) [2] Doctor: ");
+                Console.WriteLine("\nAre you [1] Patient (or) [2] Doctor (or) [3] Records Clerk: ");
                 string select = Console.ReadLine();
 
-                if (select == "1" || select == "2")
+                if (select == "1" || select == "2" || select=="3")
                 {
                     Console.WriteLine("Please log in:");
 
@@ -160,6 +81,20 @@ namespace SimpleHospitalManagementSystem
                                 Console.WriteLine("Patient not found.");
                             }
                         }
+                        else if (role == "RecordsClerk")
+                        {
+                            // Get the patient using the hospital instance
+                            RecordsClerk RClerk = hospital.GetRecordsClerkById(id);
+
+                            if (RClerk != null)
+                            {
+                                RecordsClerkMenu( hospital, RClerk);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Records Clerk not found.");
+                            }
+                        }
                     }
                     else
                     {
@@ -176,9 +111,6 @@ namespace SimpleHospitalManagementSystem
                 }
             }
         }
-
-
-
 
         // Method to display Patient menu
         public static void PatientMenu(Patient patient, List<Room> availableRooms, Clinic clinic)
@@ -378,7 +310,6 @@ namespace SimpleHospitalManagementSystem
                 }
             }
         }
-
 
         // Method to display Doctor menu
         static void DoctorMenu(Hospital hospital, Doctor doctor)
@@ -651,6 +582,166 @@ namespace SimpleHospitalManagementSystem
                 Console.WriteLine("Patient not found.");
             }
         }
+        public static void RecordsClerkMenu(Hospital hospital, RecordsClerk clerk)
+        {
+            int choice;
+            do
+            {
+
+                Console.WriteLine("\n--- Records Clerk Menu ---");
+                Console.WriteLine("1. Create New Doctor");
+                Console.WriteLine("2. Edit Doctor");
+                Console.WriteLine("3. Remove Doctor");
+                Console.WriteLine("4. Create New Patient");
+                Console.WriteLine("5. Edit Patient");
+                Console.WriteLine("6. Remove Patient");
+                Console.WriteLine("7. Generate Patient Report");
+                Console.WriteLine("0. Exit");
+                Console.Write("Enter your choice: ");
+                choice = Convert.ToInt32(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        CreateNewDoctor(hospital, clerk);
+                        break;
+                    case 2:
+                        EditDoctor(hospital, clerk);
+                        break;
+                    case 3:
+                        RemoveDoctor(hospital, clerk);
+                        break;
+                    case 4:
+                        CreateNewPatient(hospital, clerk);
+                        break;
+                    case 5:
+                        EditPatient(hospital, clerk);
+                        break;
+                    case 6:
+                        RemovePatient(hospital, clerk);
+                        break;
+                    case 7:
+                        GeneratePatientReport(hospital, clerk);
+                        break;
+                    case 0:
+                        Console.WriteLine("Exiting Records Clerk Menu...");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice, please try again.");
+                        break;
+                }
+            }
+
+            while (choice != 0);
+            }
+
+        // Method to create a new doctor
+        public static void CreateNewDoctor(Hospital hospital, RecordsClerk clerk)
+        {
+            Console.Write("Enter Doctor ID: ");
+            int doctorId = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter Doctor Name: ");
+            string name = Console.ReadLine();
+            Console.Write("Enter Doctor Age: ");
+            int age = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter Doctor Gender (Male/Female): ");
+            Gender gender = (Gender)Enum.Parse(typeof(Gender), Console.ReadLine());
+            Console.Write("Enter Doctor Specialization (Cardiology, Neurology, etc.): ");
+            Specializations specialization = (Specializations)Enum.Parse(typeof(Specializations), Console.ReadLine());
+            Console.Write("Enter Doctor Password: ");
+            string password = Console.ReadLine();
+
+            clerk.CreateDoctor(hospital, doctorId, name, age, gender, specialization, password);
+        }
+
+        // Method to edit an existing doctor
+        public static void EditDoctor(Hospital hospital, RecordsClerk clerk)
+        {
+            Console.Write("Enter Doctor ID to edit: ");
+            int doctorId = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter new Doctor Name (leave blank to skip): ");
+            string newName = Console.ReadLine();
+            Console.Write("Enter new Doctor Age (leave blank to skip): ");
+            string ageInput = Console.ReadLine();
+            int? newAge = string.IsNullOrEmpty(ageInput) ? (int?)null : Convert.ToInt32(ageInput);
+            Console.Write("Enter new Doctor Specialization (leave blank to skip): ");
+            string specializationInput = Console.ReadLine();
+            Specializations? newSpecialization = string.IsNullOrEmpty(specializationInput) ? (Specializations?)null : (Specializations)Enum.Parse(typeof(Specializations), specializationInput);
+
+            clerk.EditDoctor(hospital, doctorId, newName, newAge, newSpecialization);
+        }
+
+        // Method to remove a doctor
+        public static void RemoveDoctor(Hospital hospital, RecordsClerk clerk)
+        {
+            Console.Write("Enter Doctor ID to remove: ");
+            int doctorId = Convert.ToInt32(Console.ReadLine());
+            clerk.RemoveDoctor(hospital, doctorId);
+        }
+
+        // Method to create a new patient
+        public static void CreateNewPatient(Hospital hospital, RecordsClerk clerk)
+        {
+            Console.Write("Enter Patient ID: ");
+            int patientId = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter Patient Name: ");
+            string name = Console.ReadLine();
+            Console.Write("Enter Patient Age: ");
+            int age = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter Patient Gender (Male/Female): ");
+            Gender gender = (Gender)Enum.Parse(typeof(Gender), Console.ReadLine());
+            Console.Write("Enter Patient Ailment: ");
+            string ailment = Console.ReadLine();
+            Console.Write("Enter Patient Password: ");
+            string password = Console.ReadLine();
+            Console.Write("Enter Assigned Doctor ID: ");
+            int doctorId = Convert.ToInt32(Console.ReadLine());
+            Doctor assignedDoctor = hospital.GetDoctorById(doctorId);
+            if (assignedDoctor == null)
+            {
+                Console.WriteLine("Doctor not found.");
+                return;
+            }
+            Console.Write("Enter Admission Date (YYYY-MM-DD): ");
+            DateTime admissionDate = DateTime.Parse(Console.ReadLine());
+
+            clerk.CreatePatient(hospital, patientId, name, age, gender, ailment, password, assignedDoctor, admissionDate);
+        }
+
+        // Method to edit an existing patient
+        public static void EditPatient(Hospital hospital, RecordsClerk clerk)
+        {
+            Console.Write("Enter Patient ID to edit: ");
+            int patientId = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter new Patient Name (leave blank to skip): ");
+            string newName = Console.ReadLine();
+            Console.Write("Enter new Patient Age (leave blank to skip): ");
+            string ageInput = Console.ReadLine();
+            int? newAge = string.IsNullOrEmpty(ageInput) ? (int?)null : Convert.ToInt32(ageInput);
+            Console.Write("Enter new Patient Ailment (leave blank to skip): ");
+            string newAilment = Console.ReadLine();
+
+            clerk.EditPatient(hospital, patientId, newName, newAge, newAilment);
+        }
+
+        // Method to remove a patient
+        public static void RemovePatient(Hospital hospital, RecordsClerk clerk)
+        {
+            Console.Write("Enter Patient ID to remove: ");
+            int patientId = Convert.ToInt32(Console.ReadLine());
+            clerk.RemovePatient(hospital, patientId);
+        }
+
+        // Method to generate a patient report
+        public static void GeneratePatientReport(Hospital hospital, RecordsClerk clerk)
+        {
+            Console.Write("Enter Patient ID to generate report for: ");
+            int patientId = Convert.ToInt32(Console.ReadLine());
+            clerk.GeneratePatientReport(hospital, patientId);
+        }
+
+
+
     }
 
 }
